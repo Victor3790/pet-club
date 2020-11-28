@@ -88,7 +88,7 @@
                   <div class="row">
                      <div class="col">
                         <p class="search__title">En la colonia:</p>
-                           <form>
+                           <form role="search" method="get" action="<?php echo home_url('/'); ?>">
                               <div class="form-group">
                                  <?php wp_nonce_field( 'register_keeper_contact', 'search_id', false ); ?>
                                  <input id="service" name="service" type="hidden">
@@ -158,7 +158,7 @@
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_marital_status" value="other">
+                        <input class="form-check-input" type="radio" name="tpc_marital_status" value="otro">
                         <label class="form-check-label tpc-form__radio-label" for="tpc_marital_status">
                            Otro
                         </label>
@@ -202,25 +202,25 @@
                   <fieldset class="form-group">
                      <legend>Selecciona los servicios que ofrecerás</legend>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_lodging" value="Hospedaje">
+                        <input class="form-check-input" type="checkbox" name="tpc_lodging" value="true">
                         <label class="form-check-label" for="tpc_lodging">
                            Hospedaje ($200.00)
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_day_care" value="Guarderia">
+                        <input class="form-check-input" type="checkbox" name="tpc_day_care" value="true">
                         <label class="form-check-label" for="tpc_day_care">
                            Guardería ($180.00)
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_hour_walk" value="Paseo x hora">
+                        <input class="form-check-input" type="checkbox" name="tpc_hour_walk" value="true">
                         <label class="form-check-label" for="tpc_hour_walk">
                            Paseo x hora ($180.00)
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_half_walk" value="Paseo 30 min">
+                        <input class="form-check-input" type="checkbox" name="tpc_half_walk" value="true">
                         <label class="form-check-label" for="tpc_half_walk">
                            Paseo 30 min ($80.00)
                         </label>
@@ -229,13 +229,13 @@
                   <fieldset class="form-group">
                      <legend>Selecciona las máscotas que atenderás.</legend>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_dog" value="Perro">
+                        <input class="form-check-input" type="checkbox" name="tpc_dog" value="true">
                         <label class="form-check-label" for="tpc_dog">
                            Perro
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_cat" value="Gato">
+                        <input class="form-check-input" type="checkbox" name="tpc_cat" value="true">
                         <label class="form-check-label" for="tpc_cat">
                            Gato
                         </label>

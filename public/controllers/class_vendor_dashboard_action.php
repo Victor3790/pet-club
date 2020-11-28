@@ -121,29 +121,29 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                         [
                             'input_name' => 'tpc_home', 
                             'type' => 'string', 
-                            'min' => 5,
-                            'max' => 9
+                            'min' => 4,
+                            'max' => 11
                         ],
                         [
                             'input_name' => 'tpc_injection', 
                             'type' => 'string', 
-                            'min' => 13
+                            'min' => 18
                         ],
                         [
                             'input_name' => 'tpc_special_care', 
                             'type' => 'string', 
-                            'min' => 16
+                            'min' => 19
                         ],
                         [
                             'input_name' => 'tpc_marital_status',
                             'type' => 'string',
-                            'min' => 5,
+                            'min' => 4,
                             'max' => 7
                         ],
                         [
                             'input_name' => 'tpc_kids', 
                             'type' => 'string', 
-                            'min' => 8
+                            'min' => 5
                         ],
                         [
                             'input_name' => 'tpc_pets', 
@@ -179,22 +179,32 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                         [
                             'input_name' => 'tpc_lodging', 
                             'type' => 'string', 
-                            'min' => 9
+                            'min' => 4
                         ],
                         [
                             'input_name' => 'tpc_day_care', 
                             'type' => 'string', 
-                            'min' => 9
+                            'min' => 4
                         ],
                         [
                             'input_name' => 'tpc_hour_walk', 
                             'type' => 'string', 
-                            'min' => 12
+                            'min' => 4
                         ],
                         [
                             'input_name' => 'tpc_half_walk', 
                             'type' => 'string', 
-                            'min' => 12
+                            'min' => 4
+                        ],
+                        [
+                            'input_name' => 'tpc_dog', 
+                            'type' => 'string', 
+                            'min' => 4
+                        ],
+                        [
+                            'input_name' => 'tpc_cat', 
+                            'type' => 'string', 
+                            'min' => 4
                         ]
                     ];
 
@@ -203,12 +213,26 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $this->tpc_register_products( $keeper_serv_data );
 
-            $this->vk_send_result( true );
+            $user_id = get_current_user_id();
+            $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
+
+            $post_data = [
+                'kp_lodging'    =>  $keeper_serv_data['tpc_lodging'],
+                'kp_day_care'   =>  $keeper_serv_data['tpc_day_care'],
+                'kp_hour_walk'  =>  $keeper_serv_data['tpc_hour_walk'],
+                'kp_half_walk'  =>  $keeper_serv_data['tpc_half_walk'],
+                'kp_dog'        =>  $keeper_serv_data['tpc_dog'],
+                'kp_cat'        =>  $keeper_serv_data['tpc_cat']
+            ];
+
+            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
+
+            $this->vk_send_result( $result );
         }
 
-        private function tpc_register_products( /*$services*/ )
+        private function tpc_register_products( $services )
         {
-            /*$user_id = get_current_user_id();
+            $user_id = get_current_user_id();
             $service_name = '';
             $service_id = 0;
 
@@ -263,9 +287,9 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $update_status = Vk_Meta::register_current_user_meta( $meta );
 
-            $this->vk_send_result( $update_status );*/
+            $this->vk_send_result( $update_status );
 
-            $post_id = wp_insert_post( array(
+            /*$post_id = wp_insert_post( array(
                 'post_title' => 'Bartosz\'s product',
                 'post_content' => 'Product for Bartosz and Torvi.',
                 'post_status' => 'publish',
@@ -282,7 +306,8 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 ) 
             );
 
-            wp_set_object_terms( $post_id, 'booking', 'product_type' );
+            wp_set_object_terms( $post_id, 'booking', 'product_type' );*/
+            //set_post_thumbnail( $post_id,  );
 
         }
     }

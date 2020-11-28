@@ -1,6 +1,7 @@
 jQuery(document).ready(function ($) {
 
     $('#tpc_open_wp_media_upload').click(function(){
+
         media_uploader = wp.media({
             title: 'Selecciona una imagen',
             frame: 'select',
@@ -14,5 +15,10 @@ jQuery(document).ready(function ($) {
         });
 
         media_uploader.open();
+
+        media_uploader.on( 'select', function(){ 
+                attachment = media_uploader.state().get('selection').first().toJSON();
+                console.log(attachment.id); 
+            });
     });
 });

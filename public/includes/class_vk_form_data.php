@@ -156,12 +156,12 @@ if(!class_exists('Vk_Form_Data'))
         private function validate_length( $input, $min, $max )
         {
             if( empty($max) ){
-                if( strlen( $input ) == $min )
+                if( iconv_strlen( $input ) == $min )
                     return true;
                 else
                     return false;
             }else{
-                if( strlen( $input ) >= $min && strlen( $input ) <= $max )
+                if( iconv_strlen( $input ) >= $min && iconv_strlen( $input ) <= $max )
                     return true;
                 else
                     return false;

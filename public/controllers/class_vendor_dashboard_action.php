@@ -54,6 +54,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $postarr = [
                 'post_title'    => $user_info->first_name . ' ' . $user_info->last_name,
+                'post_content'  => '',
                 'post_status'   => 'publish',
                 'post_type'     => 'keeper',
                 'meta_input'    =>  [
@@ -161,10 +162,19 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $post_data = [
                 'kp_house'          =>  $keeper_hi_data['tpc_home'],
                 'kp_marital_status' =>  $keeper_hi_data['tpc_marital_status'],
-                'kp_special_care'   =>  $keeper_hi_data['tpc_special_care'],
-                'kp_kids'           =>  $keeper_hi_data['tpc_kids'],
-                'kp_pets'           =>  $keeper_hi_data['tpc_pets']
             ];
+
+            if( isset( $keeper_hi_data['tpc_special_care'] ) )
+                $post_data['kp_special_care'] = $keeper_hi_data['tpc_special_care'];
+
+            if( isset( $keeper_hi_data['tpc_injection'] ) )
+                $post_data['kp_injection'] = $keeper_hi_data['tpc_injection'];
+
+            if( isset( $keeper_hi_data['tpc_kids'] ) )
+                $post_data['kp_kids'] = $keeper_hi_data['tpc_kids'];
+
+            if( isset( $keeper_hi_data['tpc_pets'] ) )
+                $post_data['kp_pets'] = $keeper_hi_data['tpc_pets'];
 
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
 
@@ -191,10 +201,22 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                             'type' => 'string', 
                             'min' => 4
                         ],
-                        [
+                        /*[
                             'input_name' => 'tpc_half_walk', 
                             'type' => 'string', 
                             'min' => 4
+                        ],*/
+                        [
+                            'input_name' => 'tpc_description', 
+                            'type' => 'string', 
+                            'min' => 10,
+                            'max' => 250
+                        ],
+                        [
+                            'input_name' => 'tpc_thumbnail', 
+                            'type' => 'numeric', 
+                            'min' => 1,
+                            'max' => 30
                         ],
                         [
                             'input_name' => 'tpc_dog', 
@@ -211,21 +233,62 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $keeper_services = new Vk_Form_Data( $info );
             $keeper_serv_data = $keeper_services->get_data();
 
-            $this->tpc_register_products( $keeper_serv_data );
+            $products = array();
+
+            foreach ( $keeper_serv_data as $key => $value ) {
+                
+                if( $key != 'tpc_dog' && 
+                    $key != 'tpc_cat' && 
+                    $key != 'tpc_description' &&
+                    $key != 'tpc_thumbnail'
+                )
+                    $products[$key] = $value;
+
+            }
+
+            $this->tpc_register_products( $products );
 
             $user_id = get_current_user_id();
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
 
-            $post_data = [
-                'kp_lodging'    =>  $keeper_serv_data['tpc_lodging'],
-                'kp_day_care'   =>  $keeper_serv_data['tpc_day_care'],
-                'kp_hour_walk'  =>  $keeper_serv_data['tpc_hour_walk'],
-                'kp_half_walk'  =>  $keeper_serv_data['tpc_half_walk'],
-                'kp_dog'        =>  $keeper_serv_data['tpc_dog'],
-                'kp_cat'        =>  $keeper_serv_data['tpc_cat']
+            $post_data = array();
+
+            if( isset( $keeper_serv_data['tpc_lodging'] ) )
+                $post_data['kp_lodging'] = $keeper_serv_data['tpc_lodging'];
+
+            if( isset( $keeper_serv_data['tpc_day_care'] ) )
+                $post_data['kp_day_care'] = $keeper_serv_data['tpc_day_care'];
+
+            if( isset( $keeper_serv_data['tpc_hour_walk'] ) )
+                $post_data['kp_hour_walk'] = $keeper_serv_data['tpc_hour_walk'];
+
+            /*if( isset( $keeper_serv_data['tpc_half_walk'] ) )
+                $post_data['kp_half_walk'] = $keeper_serv_data['tpc_half_walk'];*/
+
+            if( isset( $keeper_serv_data['tpc_dog'] ) )
+                $post_data['kp_dog'] = $keeper_serv_data['tpc_dog'];
+            
+            if( isset( $keeper_serv_data['tpc_cat'] ) )
+                $post_data['kp_cat'] = $keeper_serv_data['tpc_cat'];
+
+            if( isset( $keeper_serv_data['tpc_thumbnail'] ) )
+                $thumbnail_id = $keeper_serv_data['tpc_thumbnail'];
+
+            Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
+
+            $postarr = [
+                'ID'    => $keeper_post_id,
+                'post_content' => $keeper_serv_data['tpc_description']
+            ];
+    
+            wp_update_post( $postarr );
+            set_post_thumbnail( $keeper_post_id, $thumbnail_id );
+
+            $meta = [
+                'tpc_vendor_registration' => true
             ];
 
-            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
+            $result = Vk_User_Meta::register_current_user_meta( $meta );
 
             $this->vk_send_result( $result );
         }
@@ -235,10 +298,6 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $user_id = get_current_user_id();
             $service_name = '';
             $service_id = 0;
-
-            $meta = [
-                'tpc_vendor_registration' => true
-            ];
 
             foreach ($services as $key => $value) {
 
@@ -254,14 +313,14 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                     break;
 
                     case 'tpc_hour_walk':
-                        $service_id = 730;
+                        $service_id = 892;
                         $service_name = 'Paseo de una hora para perro.';
                     break;
 
-                    case 'tpc_half_walk':
+                    /*case 'tpc_half_walk':
                         $service_id = 883;
                         $service_name = 'Paseo de media hora para perro.';
-                    break;
+                    break;*/
                     
                     default:
                         throw new Exception(
@@ -285,9 +344,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 wp_update_post( $product_name );
             }
 
-            $update_status = Vk_Meta::register_current_user_meta( $meta );
-
-            $this->vk_send_result( $update_status );
+            return;
 
             /*$post_id = wp_insert_post( array(
                 'post_title' => 'Bartosz\'s product',

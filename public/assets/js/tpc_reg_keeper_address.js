@@ -1,12 +1,12 @@
 jQuery(document).ready(function ($) {
 
-    let input = document.getElementById('region_1');
+    /*let input = document.getElementById('region_1');
     let options = {
         types: ['(regions)'],
         componentRestrictions: {country: 'mx'}
     };
 
-    const autocomplete = new google.maps.places.Autocomplete(input, options);
+    const autocomplete = new google.maps.places.Autocomplete(input, options);*/
 
     $('#tpc_keeper_address_form').validate({
         rules: {

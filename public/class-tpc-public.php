@@ -64,7 +64,10 @@ class Tpc_Public {
     private function load_dependencies() {
 
         require_once TPC_PLUGIN_PATH . 'public/controllers/class_vendor_dashboard.php';
-        require_once TPC_PLUGIN_PATH . 'public/controllers/class_vendor_dashboard_action.php';
+		require_once TPC_PLUGIN_PATH . 'public/controllers/class_vendor_dashboard_action.php';
+		
+		require_once TPC_PLUGIN_PATH . 'public/controllers/class_search_dashboard.php';
+        require_once TPC_PLUGIN_PATH . 'public/controllers/class_search_dashboard_action.php';
 
     }
 
@@ -247,8 +250,8 @@ class Tpc_Public {
 			$this->version, 
 			false );
 		
-		wp_register_script( $this->plugin_name . '_google_maps', 
-            'https://maps.googleapis.com/maps/api/js?key=AIzaSyBJgmYbg2rBI_-N1Ujn6g6fLsVQTIZOgQk&libraries=places', 
+		/*wp_register_script( $this->plugin_name . '_google_maps', 
+            'https://maps.googleapis.com/maps/api/js?key=&libraries=places', 
 			array(), 
 			$this->version, 
 			false );
@@ -257,7 +260,7 @@ class Tpc_Public {
 			plugin_dir_url( __FILE__ ) . 'assets/js/tpc_map.js', 
 			array('jquery', $this->plugin_name . '_google_maps'), 
 			$this->version, 
-			false );
+			false );*/
 
 		wp_register_script( $this->plugin_name . '_tpc_search_controls', 
 			plugin_dir_url( __FILE__ ) . 'assets/js/tpc_search_controls.js', 
@@ -275,9 +278,11 @@ class Tpc_Public {
 
 	public function register_shortcodes() { 
 
-        $vendor_dashboard 	= new Tpc_Vendor_Dashboard($this->plugin_name);
+		$vendor_dashboard 	= new Tpc_Vendor_Dashboard($this->plugin_name);
+		$search_dashboard 	= new Tpc_Search_Dashboard($this->plugin_name);
 
-        add_shortcode('tpc_vendor_dashboard', array($vendor_dashboard, 'tpc_load_vendor_dashboard'));
+		add_shortcode('tpc_vendor_dashboard', array($vendor_dashboard, 'tpc_load_vendor_dashboard'));
+		add_shortcode('tpc_search_dashboard', array($search_dashboard, 'tpc_load_search_dashboard'));
 	}
 	
 	/**

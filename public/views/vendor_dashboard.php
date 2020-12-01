@@ -45,64 +45,6 @@
                   <input class="tpc-form__button" type="submit" value="Guardar">
                </div>
             </form>  
-
-            <div class="search">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-12 col-lg-8">
-                        <p class="search__title">Necesito servicio de:</p>
-                        <div class="row justify-content-around">
-                           <div id="lodging"
-                              class="col-5 col-sm-3 col-lg-3 search__item search__item__service">
-                              <i class="fas fa-suitcase search__icon"></i>
-                              <p class="search__text">Hospedaje</p>
-                           </div>
-                           <div id="day care" 
-                              class="col-5 col-sm-3 col-lg-3 search__item search__item__service">
-                              <i class="fas fa-bone search__icon"></i>
-                              <p class="search__text">Guardería</p>
-                           </div>
-                           <div id="walk" 
-                              class="col-10 col-sm-3 col-lg-3 search__item search__item__service">
-                              <i class="fas fa-paw search__icon"></i>
-                              <p class="search__text">Paseo</p>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-12 col-lg-4">
-                        <p class="search__title">Para mi:</p>
-                        <div class="row justify-content-around">
-                           <div id="dog" 
-                              class="col-5 search__item search__item__pet">
-                              <i class="fas fa-dog search__icon"></i>
-                              <p class="search__text">Perro</p>
-                           </div>
-                           <div id="cat" 
-                              class="col-5 search__item search__item__pet">
-                              <i class="fas fa-cat search__icon"></i>
-                              <p class="search__text">Gato</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col">
-                        <p class="search__title">En la colonia:</p>
-                           <form role="search" method="get" action="<?php echo home_url('/'); ?>">
-                              <div class="form-group">
-                                 <?php wp_nonce_field( 'register_keeper_contact', 'search_id', false ); ?>
-                                 <input id="service" name="service" type="hidden">
-                                 <input id="dog_input" name="dog" type="hidden" value=0>
-                                 <input id="cat_input" name="cat" type="hidden" value=0>
-                                 <input id="region" name="region" type="text">
-                                 <input class="tpc-form__button" type="submit" value="Buscar">
-                              </div>
-                           </form> 
-                     </div>
-                  </div>
-               </div>    
-            </div>
-
        </div>
        <div id="step-2" class="tab-pane" role="tabpanel">
             <h5>Contacto</h5>
@@ -120,9 +62,9 @@
             </form>  
        </div>
        <div id="step-3" class="tab-pane" role="tabpanel">
-            <p>Sube algunas imagenes de tu casa</p>
+            <h3>Sube algunas imagenes para conocerte mejor.</h3>
             <a href="#" id="tpc_open_wp_media_upload" class="btn btn-primary">Subir imagenes</a>
-            <h5>Tu casa</h5>
+            <h3>Tu casa</h3>
             <p>Requerimos tu información acerca del espacio donde cuidarás a las mascotas.</p>
             <form class="tpc-form" id="tpc_keeper_home_form">
                <div class="form-group">
@@ -195,8 +137,10 @@
             </form> 
        </div>
        <div id="step-4" class="tab-pane" role="tabpanel">
-            <h5>Los servicios que ofreces.</h5>
+            <h3>Los servicios que ofreces.</h3>
             <p>Manejamos precios fijos, y una comisión del __%.</p>
+            <h5>Selecciona una imagen para que aparezca en la parte principal de tu perfil.</h5>
+            <a href="#" id="tpc_open_wp_media_upload_main" class="btn btn-primary">Seleccionar</a><br><br>
             <form class="tpc-form" id="tpc_keeper_services">
                <div class="form-group">
                   <fieldset class="form-group">
@@ -219,12 +163,12 @@
                            Paseo x hora ($180.00)
                         </label>
                      </div>
-                     <div class="form-check">
+                     <!--<div class="form-check">
                         <input class="form-check-input" type="checkbox" name="tpc_half_walk" value="true">
                         <label class="form-check-label" for="tpc_half_walk">
                            Paseo 30 min ($80.00)
                         </label>
-                     </div>
+                     </div>-->
                   </fieldset>
                   <fieldset class="form-group">
                      <legend>Selecciona las máscotas que atenderás.</legend>
@@ -241,6 +185,13 @@
                         </label>
                      </div>
                   </fieldset>
+                  <fieldset class="form-group">
+                     <legend>Cuentanos un poco más de ti y tus servicios. (Entre 10 y 250 caracteres)</legend>
+                     <div>
+                        <textarea name="tpc_description" id="tpc_description" cols="30" rows="10" required></textarea>
+                     </div>
+                  </fieldset>
+                  <input type="hidden" name="tpc_thumbnail" id="tpc_thumbnail">
                   <?php wp_nonce_field( 'register_keeper_services', 'tpc_keeper_services_id', false ); ?>
                   <input type="hidden" name="action" value="tpc_register_keeper_services">
                   <input class="tpc-form__button" type="submit" value="Guardar">

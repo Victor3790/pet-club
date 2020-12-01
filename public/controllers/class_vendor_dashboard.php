@@ -13,7 +13,7 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
         private $plugin_name;
         private $current_user_id;
         private $vendor_dashboard_action;
-        private $user_can = 'vendor';
+        private $user_can = 'seller';
 
         public function __construct($plugin_name_param)
         {
@@ -24,7 +24,7 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
 
         public function tpc_load_vendor_dashboard()
         {
-            //$this->vk_check_permission($this->user_can);
+            $this->vk_check_permission($this->user_can);
 
             $scripts = [
                 '_jquery_ajax',
@@ -38,19 +38,13 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
                 '_tpc_reg_keeper_contact',
                 '_tpc_reg_keeper_home',
                 '_tpc_reg_keeper_services',
-                '_tpc_wp_media_upload_image',
-                '_google_maps',
-                '_tpc_map',
-                '_tpc_search_controls'
+                '_tpc_wp_media_upload_image'
             ];
 
             $styles = [
                 '_bootstrap_styles',
                 '_wizard_styles',
-                '_form_styles',
-                '_fontawesome',
-                '_fontawesome_solid',
-                '_search'
+                '_form_styles'
             ];
 
             $this->vk_enqueue_styles( $this->plugin_name, $styles );

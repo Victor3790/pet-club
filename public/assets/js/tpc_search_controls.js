@@ -31,15 +31,15 @@ jQuery(document).ready(function ($) {
 
         switch (item_id) {
             case 'lodging':
-                $('#service').attr('value', 'lodging');    
+                $('#service').attr('value', 'kp_lodging');    
             break;
 
             case 'day care':
-                $('#service').attr('value', 'day care');    
+                $('#service').attr('value', 'kp_day_care');    
             break;
 
             case 'walk':
-                $('#service').attr('value', 'walk');    
+                $('#service').attr('value', 'kp_walk');    
             break;
         
             default:

@@ -42,12 +42,12 @@
                 <p class="search__title">En la colonia:</p>
                 <form role="search" method="get" action="<?php echo home_url('/'); ?>">
                     <div class="form-group">
-                        <?php wp_nonce_field( 'search_for_keepers', 'search_id', false ); ?>
+                        <?php wp_nonce_field( 'search_for_keepers', 'tpc_search_id', false ); ?>
                         <input name="post_type" type="hidden" value="keeper">
-                        <input id="service" name="service" type="hidden">
-                        <input id="dog_input" name="dog" type="hidden" value=0>
-                        <input id="cat_input" name="cat" type="hidden" value=0>
-                        <input id="region" name="region" type="text">
+                        <input id="service" name="tpc_service" type="hidden">
+                        <input id="dog_input" name="tpc_dog" type="hidden" value=0>
+                        <input id="cat_input" name="tpc_cat" type="hidden" value=0>
+                        <input id="region" name="tpc_region" type="text">
                         <input class="tpc-form__button" type="submit" value="Buscar">
                     </div>
                 </form> 

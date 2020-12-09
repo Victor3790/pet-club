@@ -63,7 +63,7 @@
        </div>
        <div id="step-3" class="tab-pane" role="tabpanel">
             <h3>Sube algunas imagenes para conocerte mejor.</h3>
-            <a href="#" id="tpc_open_wp_media_upload" class="btn btn-primary">Subir imagenes</a>
+            <a href="#" id="tpc_open_attachment_uploader" class="btn btn-primary">Subir imagenes</a>
             <h3>Tu casa</h3>
             <p>Requerimos tu información acerca del espacio donde cuidarás a las mascotas.</p>
             <form class="tpc-form" id="tpc_keeper_home_form">
@@ -130,6 +130,7 @@
                         <label class="form-check-label" for="tpc_special_care">Cuidados especiales</label>
                      </div>
                   </fieldset>
+                  <input type="hidden" name="tpc_attachments" id="tpc_attachments">
                   <?php wp_nonce_field( 'register_keeper_home_info', 'tpc_keeper_house_id', false ); ?>
                   <input type="hidden" name="action" value="tpc_register_keeper_house_info">
                   <input class="tpc-form__button" type="submit" value="Guardar">
@@ -140,7 +141,7 @@
             <h3>Los servicios que ofreces.</h3>
             <p>Manejamos precios fijos, y una comisión del __%.</p>
             <h5>Selecciona una imagen para que aparezca en la parte principal de tu perfil.</h5>
-            <a href="#" id="tpc_open_wp_media_upload_main" class="btn btn-primary">Seleccionar</a><br><br>
+            <a href="#" id="tpc_open_thumbnail_uploader" class="btn btn-primary">Seleccionar</a><br><br>
             <form class="tpc-form" id="tpc_keeper_services">
                <div class="form-group">
                   <fieldset class="form-group">

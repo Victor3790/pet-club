@@ -1,41 +1,59 @@
 jQuery(document).ready(function ($) {
 
-    $('#tpc_open_wp_media_upload').click(function(){
-
-        media_uploader = wp.media({
-            title: 'Selecciona una imagen',
-            frame: 'select',
-            multiple: 'false',
-            library: {
-                type: 'image/jpeg'
-            },
-            button: {
-                text: 'Subir'
-            }
-        });
-
-        media_uploader.open();
+    attachment_uploader = wp.media({
+        title: 'Selecciona o sube imagenes de tu casa.',
+        frame: 'select',
+        multiple: 'true',
+        library: {
+            type: 'image/jpeg'
+        },
+        button: {
+            text: 'Subir'
+        }
     });
 
-    $('#tpc_open_wp_media_upload_main').click(function(){
+    $('#tpc_open_attachment_uploader').click(function(){
 
-        media_uploader = wp.media({
-            title: 'Selecciona una imagen',
-            frame: 'select',
-            multiple: 'false',
-            library: {
-                type: 'image/jpeg'
-            },
-            button: {
-                text: 'Seleccionar'
-            }
+        attachment_uploader.open();
+
+    });
+
+    attachment_uploader.on( 'select', function(){ 
+
+        attachments = attachment_uploader.state().get('selection').toJSON();
+
+        var attachment_ids = [];
+
+        attachments.forEach(element => {
+            attachment_ids.push( element.id );
         });
 
-        media_uploader.open();
+        $('#tpc_attachments').val(JSON.stringify(attachment_ids));  
 
-        media_uploader.on( 'select', function(){ 
-                attachment = media_uploader.state().get('selection').first().toJSON();
-                $('#tpc_thumbnail').val(attachment.id);
-            });
+    });
+
+    thumbnail_uploader = wp.media({
+        title: 'Selecciona una imagen',
+        frame: 'select',
+        multiple: 'false',
+        library: {
+            type: 'image/jpeg'
+        },
+        button: {
+            text: 'Seleccionar'
+        }
+    });
+
+    $('#tpc_open_thumbnail_uploader').click(function(){
+
+        thumbnail_uploader.open();
+
+    });
+
+    thumbnail_uploader.on( 'select', function(){ 
+
+        attachment = thumbnail_uploader.state().get('selection').first().toJSON();
+        $('#tpc_thumbnail').val(attachment.id);
+
     });
 });

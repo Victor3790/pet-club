@@ -51,6 +51,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $keeper_address = new Vk_Form_Data( $info );
             $keeper_addr_data = $keeper_address->get_data();
             $user_info = wp_get_current_user();
+            $store_url = dokan_get_store_url( $user_info->ID );
 
             $postarr = [
                 'post_title'    => $user_info->first_name . ' ' . $user_info->last_name,
@@ -60,7 +61,8 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 'meta_input'    =>  [
                                         'kp_street' => $keeper_addr_data['tpc_street'],
                                         'kp_zip'    => $keeper_addr_data['tpc_zip_code'],
-                                        'kp_colony' => $keeper_addr_data['tpc_colony']
+                                        'kp_colony' => $keeper_addr_data['tpc_colony'],
+                                        'kp_store_url' => $store_url
                                     ]
             ];
 
@@ -120,6 +122,12 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $info = [
                         [
+                            'input_name' => 'tpc_attachments', 
+                            'type' => 'string', 
+                            'min' => 1,
+                            'max' => 90
+                        ],
+                        [
                             'input_name' => 'tpc_home', 
                             'type' => 'string', 
                             'min' => 4,
@@ -158,6 +166,19 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $user_id = get_current_user_id();
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
+
+            if( isset( $keeper_hi_data['tpc_attachments'] ) ) {
+
+                $attachments = json_decode($keeper_hi_data['tpc_attachments'],true);
+
+                foreach ($attachments as $attachment) {
+
+                    $args = get_post( $attachment, 'ARRAY_A' );
+                    wp_insert_attachment( $args, null, $keeper_post_id );
+
+                }
+
+            }
 
             $post_data = [
                 'kp_house'          =>  $keeper_hi_data['tpc_home'],
@@ -313,7 +334,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                     break;
 
                     case 'tpc_hour_walk':
-                        $service_id = 892;
+                        $service_id = 730;
                         $service_name = 'Paseo de una hora para perro.';
                     break;
 

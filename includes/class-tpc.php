@@ -185,7 +185,7 @@ class Tpc {
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_media_uploader' );
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'check_registration' );
-		$this->loader->add_action( 'pre_get_posts', $search, 'search' );
+		$this->loader->add_action( 'elementor/query/tpc_keepers', $search, 'search' );
 
 		$this->loader->add_filter( 'dokan_get_dashboard_nav', $plugin_public, 'modify_dokan_dashboard' );
 		$this->loader->add_filter( 'query_vars', $query_vars, 'set_vars' );

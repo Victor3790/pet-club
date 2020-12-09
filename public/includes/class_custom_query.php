@@ -6,14 +6,11 @@ if(!class_exists('Custom_Query'))
     {
         function search( $query )
         {
-        
-            if( is_admin() || !$query->is_main_query() )
-                return;
             
             if( !is_post_type_archive( 'keeper' ) )
                 return;
 
-            $search_nonce = get_query_var( 'search_id' );
+            $search_nonce = get_query_var( 'tpc_search_id' );
             
             if( empty( $search_nonce ) )
                 return;
@@ -23,31 +20,37 @@ if(!class_exists('Custom_Query'))
         
             $meta_query = array();
 
-            $service = get_query_var( 'service', null );
+            $service = get_query_var( 'tpc_service', null );
         
             if( !empty( $service ) ){
-                $meta_query[] = array( 'key'=>$service, 'value'=>'true', 'compare'=>'=', 'type'=>'CHAR'  );
+                $meta_query[] = array( 'key'=>$service, 'compare'=>'EXISTS' );
+            }
+
+            $dog = get_query_var( 'tpc_dog', null );
+
+            if( !empty( $dog ) ){
+                $meta_query[] = array( 'key'=>'kp_dog', 'compare'=>'EXISTS' );
+            }
+
+            $cat = get_query_var( 'tpc_cat', null );
+        
+            if( !empty( $cat ) ){
+                $meta_query[] = array( 'key'=>'kp_cat', 'compare'=>'EXISTS' );
+            }
+
+            $region = get_query_var( 'region', null );
+            if( !empty( $region ) ){
+                $meta_query[] = array( 'key'=>'kp_colony', 'value'=>$region, 'compare'=>'=', 'type'=>'CHAR'  );
             }
         
         
-          /*if( isset( $precio ) ){
-            $precio_from      = get_query_var( 'precio' );
-            $precio_to        = $precio_from + 100000;
-            if($precio_from == 500000){
-              $meta_query[] = array( 'key'=>'precio_data', 'value'=>$precio_from, 'compare'=>'>=', 'type'=>'NUMERIC'  );
-            }else{
-              $meta_query[] = array( 'key'=>'precio_data', 'value'=>array($precio_from, $precio_to), 'compare'=>'BETWEEN', 'type'=>'NUMERIC'  );
+            if( count( $meta_query ) > 1 ){
+              $meta_query['relation'] = 'AND';
             }
-          }
         
-          if( count( $meta_query ) > 1 ){
-            $meta_query['relation'] = 'AND';
-            $meta_query['orderby']  = array('precio_data'=>'DESC');
-          }
-        
-          if( count( $meta_query ) > 0 ){
-            $query->set('meta_query', $meta_query);
-          }*/
+            if( count( $meta_query ) > 0 ){
+              $query->set('meta_query', $meta_query);
+            }
         }
     }
 }

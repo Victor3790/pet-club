@@ -39,7 +39,7 @@ jQuery(document).ready(function ($) {
             break;
 
             case 'walk':
-                $('#service').attr('value', 'kp_walk');    
+                $('#service').attr('value', 'kp_hour_walk');    
             break;
         
             default:

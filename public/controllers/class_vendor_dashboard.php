@@ -24,7 +24,15 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
 
         public function tpc_load_vendor_dashboard()
         {
-            $this->vk_check_permission($this->user_can);
+            try {
+
+                $this->vk_check_permission($this->user_can);
+
+            } catch (Exception $e) {
+
+                exit();
+
+            }
 
             $scripts = [
                 '_jquery_ajax',

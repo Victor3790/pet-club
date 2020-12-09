@@ -320,6 +320,11 @@ class Tpc_Public {
 
 		if( is_page( 'dashboard' ) ){
 
+			if( !is_user_logged_in() ) {
+				wp_safe_redirect( home_url() );
+				exit();
+			}
+
 			$user_id = get_current_user_id();
 			$complete_reg = get_user_meta( $user_id, 'tpc_vendor_registration', true );
 
@@ -331,6 +336,11 @@ class Tpc_Public {
 
 		if( is_page( 'tpc_vendor_registration' ) ){
 
+			if( !is_user_logged_in() ) {
+				wp_safe_redirect( home_url() );
+				exit();
+			}
+
 			$user_id = get_current_user_id();
 			$complete_reg = get_user_meta( $user_id, 'tpc_vendor_registration', true );
 			
@@ -340,6 +350,8 @@ class Tpc_Public {
 			}
 
 		}
+
+		return;
 
 	}
 

@@ -5,17 +5,17 @@
                 <p class="search__title">Necesito servicio de:</p>
                 <div class="row justify-content-around">
                     <div id="lodging"
-                        class="col-5 col-sm-3 col-lg-3 search__item search__item__service">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__service">
                         <i class="fas fa-suitcase search__icon"></i>
                         <p class="search__text">Hospedaje</p>
                     </div>
                     <div id="day care" 
-                        class="col-5 col-sm-3 col-lg-3 search__item search__item__service">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__service">
                         <i class="fas fa-bone search__icon"></i>
                         <p class="search__text">Guardería</p>
                     </div>
                     <div id="walk" 
-                        class="col-10 col-sm-3 col-lg-3 search__item search__item__service">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__service">
                         <i class="fas fa-paw search__icon"></i>
                         <p class="search__text">Paseo</p>
                     </div>

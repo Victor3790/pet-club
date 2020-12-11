@@ -15,6 +15,10 @@
     cursor: pointer;
 }
 
+.search__item__service {
+    margin-bottom: 20px;
+}
+
 .search__item--active{
     border: 1px solid red;
 }
@@ -42,4 +46,10 @@
 
 .search__title{
     margin: 25px 0;
+}
+
+@media screen and (min-width:576px) {
+    .search__item__service {
+        margin-bottom: 0;
+    }
 }

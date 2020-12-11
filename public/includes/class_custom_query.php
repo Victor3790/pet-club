@@ -38,7 +38,7 @@ if(!class_exists('Custom_Query'))
                 $meta_query[] = array( 'key'=>'kp_cat', 'compare'=>'EXISTS' );
             }
 
-            $region = get_query_var( 'region', null );
+            $region = get_query_var( 'tpc_region', null );
             if( !empty( $region ) ){
                 $meta_query[] = array( 'key'=>'kp_colony', 'value'=>$region, 'compare'=>'=', 'type'=>'CHAR'  );
             }

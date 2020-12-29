@@ -1,6 +1,5 @@
 .search{
-    min-width: 400px;
-    max-width: 800px;
+    width: 96%;
     margin: 0 auto;
     border: 1px solid #878787;
     border-radius: 3px;
@@ -49,6 +48,10 @@
 }
 
 @media screen and (min-width:576px) {
+    .search {
+        max-width: 800px;
+    }
+    
     .search__item__service {
         margin-bottom: 0;
     }

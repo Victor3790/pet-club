@@ -1,0 +1,5 @@
+*.phar
+*.lock
+vendor/
+.vscode/
+.git/

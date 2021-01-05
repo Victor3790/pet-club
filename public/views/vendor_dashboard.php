@@ -1,3 +1,9 @@
+<?php 
+
+if(empty($preference))
+   return;
+
+?>
 <h3>Hola <?php echo $user_name; ?>.</h3>
 <p>
    Queremos conocerte un poco mejor, 
@@ -29,7 +35,13 @@
     </ul>
  
     <div class="tab-content">
-       <div id="step-1" class="tab-pane" role="tabpanel">
+
+      <script
+         src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
+         data-preference-id="<?php echo $preference->id; ?>">
+      </script>
+
+      <div id="step-1" class="tab-pane" role="tabpanel">
             <h5>Dirección</h5>
             <p>Requerimos tu dirección para poder conectarte con clientes cerca de ti.</p>
             <form class="tpc-form" id="tpc_keeper_address_form">

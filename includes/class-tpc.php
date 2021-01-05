@@ -176,9 +176,12 @@ class Tpc {
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_custom_query_vars.php';
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_custom_query.php';
 
+		require_once TPC_PLUGIN_PATH . 'public/includes/class_mercado_pago.php';
+
 		$plugin_public = new Tpc_Public( $this->get_plugin_name(), $this->get_version() );
 		$query_vars = new Custom_Query_Vars();
 		$search = new Custom_Query();
+		$mercado_pago = new Tpc_Mercado_Pago();
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -186,6 +189,7 @@ class Tpc {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_media_uploader' );
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'check_registration' );
 		$this->loader->add_action( 'elementor/query/tpc_keepers', $search, 'search' );
+		$this->loader->add_action( 'rest_api_init', $mercado_pago, 'register_route' );
 
 		$this->loader->add_filter( 'dokan_get_dashboard_nav', $plugin_public, 'modify_dokan_dashboard' );
 		$this->loader->add_filter( 'query_vars', $query_vars, 'set_vars' );

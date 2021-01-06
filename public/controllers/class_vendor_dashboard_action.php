@@ -198,7 +198,12 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 'kp_marital_status' =>  $keeper_hi_data['tpc_marital_status'],
             ];
 
-            if( isset( $keeper_hi_data['tpc_special_care'] ) )
+            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
+
+            if( !$result )
+                $this->vk_send_result( $result );
+
+            /*if( isset( $keeper_hi_data['tpc_special_care'] ) )
                 $post_data['kp_special_care'] = $keeper_hi_data['tpc_special_care'];
 
             if( isset( $keeper_hi_data['tpc_injection'] ) )
@@ -209,6 +214,20 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             if( isset( $keeper_hi_data['tpc_pets'] ) )
                 $post_data['kp_pets'] = $keeper_hi_data['tpc_pets'];
+
+            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );*/
+
+            $post_data = null;
+
+            $abilities = array();
+
+            if( isset( $keeper_hi_data['tpc_special_care'] ) )
+                array_push( $abilities, 'Cuidados especiales' );
+
+            if( isset( $keeper_hi_data['tpc_injection'] ) )
+                array_push( $abilities, 'Aplicación de injecciones' );
+
+            $post_data = [ 'kp_abilities' => $abilities ];
 
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
 

@@ -67,7 +67,9 @@ class Tpc_Public {
 		require_once TPC_PLUGIN_PATH . 'public/controllers/class_vendor_dashboard_action.php';
 		
 		require_once TPC_PLUGIN_PATH . 'public/controllers/class_search_dashboard.php';
-        require_once TPC_PLUGIN_PATH . 'public/controllers/class_search_dashboard_action.php';
+		require_once TPC_PLUGIN_PATH . 'public/controllers/class_search_dashboard_action.php';
+		
+		require_once TPC_PLUGIN_PATH . 'public/controllers/class_abilities_widget.php';
 
     }
 
@@ -281,9 +283,11 @@ class Tpc_Public {
 
 		$vendor_dashboard 	= new Tpc_Vendor_Dashboard($this->plugin_name);
 		$search_dashboard 	= new Tpc_Search_Dashboard($this->plugin_name);
+		$abilities_widget   = new Tpc_Abilities_Widget($this->plugin_name);
 
 		add_shortcode('tpc_vendor_dashboard', array($vendor_dashboard, 'tpc_load_vendor_dashboard'));
 		add_shortcode('tpc_search_dashboard', array($search_dashboard, 'tpc_load_search_dashboard'));
+		add_shortcode('tpc_abilities_list',   array($abilities_widget, 'load_view'));
 	}
 	
 	/**

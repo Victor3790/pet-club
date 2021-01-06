@@ -1,7 +1,15 @@
 jQuery(document).ready(function ($) {
 
+    $('#tpc_birthdate').datepicker();
+
     $('#tpc_keeper_contact_form').validate({
         rules: {
+            tpc_gender: {
+                required: true
+            },
+            tpc_birthdate: {
+                required: true
+            },
             tpc_home_phone: {
                 required: true,
                 rangelength: [10,10],
@@ -13,7 +21,19 @@ jQuery(document).ready(function ($) {
                 digits: true
             }
         },
+        errorPlacement: function( error, element ) {
+            if( element.is(":radio") )
+                error.appendTo( '.tpc-gender-error' );
+            else
+                error.insertAfter( element );
+        },
         messages: {
+            tpc_gender: {
+                required: 'Por favor selecciona una opción.'
+            },
+            tpc_birthdate: {
+                required: 'Por favor ingresa tu fecha de nacimiento.'
+            },
             tpc_home_phone: {
                 required: 'Por favor ingresa tu número de casa.',
                 rangelength: jQuery

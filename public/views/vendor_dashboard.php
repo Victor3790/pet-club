@@ -14,37 +14,36 @@ if(empty($preference))
     <ul class="nav">
        <li>
            <a class="nav-link" href="#step-1">
-              Dirección
+              Tu dirección
            </a>
        </li>
        <li>
            <a class="nav-link" href="#step-2">
-              Contacto
+              Acerca de ti
            </a>
        </li>
        <li>
            <a class="nav-link" href="#step-3">
-              Casa
+              Acerca de tu casa
            </a>
        </li>
        <li>
            <a class="nav-link" href="#step-4">
-              Servicios
+              Tus servicios
+           </a>
+       </li>
+       <li>
+           <a class="nav-link" href="#step-5">
+              Pago de membresía
            </a>
        </li>
     </ul>
  
     <div class="tab-content">
-
-      <script
-         src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
-         data-preference-id="<?php echo $preference->id; ?>">
-      </script>
-
       <div id="step-1" class="tab-pane" role="tabpanel">
-            <h5>Dirección</h5>
+            <h5>Tu dirección</h5>
             <p>Requerimos tu dirección para poder conectarte con clientes cerca de ti.</p>
-            <form class="tpc-form" id="tpc_keeper_address_form">
+            <form class="tpc-form" id="tpc_keeper_address_form" autocomplete="off">
                <div class="form-group">
                   <label class="tpc-form__label" for="tpc_street">Calle y número.</label>
                   <input class="tpc-form__input" type="text" name="tpc_street">
@@ -59,9 +58,31 @@ if(empty($preference))
             </form>  
        </div>
        <div id="step-2" class="tab-pane" role="tabpanel">
-            <h5>Contacto</h5>
-            <p>Requerimos tu información de contacto.</p>
-            <form class="tpc-form" id="tpc_keeper_contact_form">
+            <h5>Acerca de ti</h5>
+            <p>Queremos conocerte mejor, cuentanos acerca de ti.</p>
+            <form class="tpc-form" id="tpc_keeper_contact_form" autocomplete="off">
+               <div class="form-group">
+                  <div class="tpc-gender-error"></div>
+                  <fieldset>
+                     <legend>Soy :</legend>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpc_gender" value="Hombre" style="width:auto; margin-top:.3rem;">
+                        <label class="form-check-label tpc-form__radio-label" for="tpc_gender">
+                           Hombre
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tpc_gender" value="Mujer" style="width:auto; margin-top:.3rem;">
+                        <label class="form-check-label tpc-form__radio-label" for="tpc_gender">
+                           Mujer
+                        </label>
+                     </div>
+                  </fieldset>
+               </div>
+               <div class="form-group">
+                  <label class="tpc-form__label" for="tpc_birthdate">Fecha de nacimiento: </label>
+                  <input class="tpc-form__input" type="text" id="tpc_birthdate" name="tpc_birthdate">
+               </div>
                <div class="form-group">
                   <label class="tpc-form__label" for="tpc_home_phone">Teléfono de casa</label>
                   <input class="tpc-form__input" type="text" name="tpc_home_phone">
@@ -78,7 +99,7 @@ if(empty($preference))
             <a href="#" id="tpc_open_attachment_uploader" class="btn btn-primary">Subir imagenes</a>
             <h3>Tu casa</h3>
             <p>Requerimos tu información acerca del espacio donde cuidarás a las mascotas.</p>
-            <form class="tpc-form" id="tpc_keeper_home_form">
+            <form class="tpc-form" id="tpc_keeper_home_form" autocomplete="off">
                <div class="form-group">
                   <fieldset class="form-group">
                      <legend>Vives en:</legend>
@@ -154,7 +175,7 @@ if(empty($preference))
             <p>Manejamos precios fijos, y una comisión del __%.</p>
             <h5>Selecciona una imagen para que aparezca en la parte principal de tu perfil.</h5>
             <a href="#" id="tpc_open_thumbnail_uploader" class="btn btn-primary">Seleccionar</a><br><br>
-            <form class="tpc-form" id="tpc_keeper_services">
+            <form class="tpc-form" id="tpc_keeper_services" autocomplete="off">
                <div class="form-group">
                   <fieldset class="form-group">
                      <legend>Selecciona los servicios que ofrecerás</legend>
@@ -210,6 +231,12 @@ if(empty($preference))
                   <input class="tpc-form__button" type="submit" value="Guardar">
                </div>
             </form> 
+       </div>
+       <div id="step-5" class="tab-pane" role="tabpanel">
+         <script
+            src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
+            data-preference-id="<?php echo $preference->id; ?>">
+         </script>
        </div>
     </div>
 </div>

@@ -87,6 +87,17 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $info = [
                         [
+                            'input_name' => 'tpc_gender', 
+                            'type' => 'string', 
+                            'min' => 5,
+                            'max' => 6
+                        ],
+                        [
+                            'input_name' => 'tpc_birthdate', 
+                            'type' => 'string', 
+                            'min' => 10
+                        ],
+                        [
                             'input_name' => 'tpc_home_phone', 
                             'type' => 'string', 
                             'min' => 10
@@ -105,6 +116,8 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
 
             $post_data = [
+                'kp_gender'     =>  $keeper_cont_data['tpc_gender'],
+                'kp_birthdate'  =>  $keeper_cont_data['tpc_birthdate'],
                 'kp_home_phone' =>  $keeper_cont_data['tpc_home_phone'],
                 'kp_cellphone'  =>  $keeper_cont_data['tpc_cellphone']
             ];

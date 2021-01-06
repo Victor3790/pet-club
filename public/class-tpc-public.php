@@ -219,7 +219,8 @@ class Tpc_Public {
             plugin_dir_url( __FILE__ ) . 'assets/js/tpc_reg_keeper_contact.js', 
 			array( 
 				$this->plugin_name . '_validate',
-				$this->plugin_name . '_tpc_custom_wizard_process'
+				$this->plugin_name . '_tpc_custom_wizard_process',
+				'jquery-ui-datepicker'
 			), 
 			$this->version, 
 			false );

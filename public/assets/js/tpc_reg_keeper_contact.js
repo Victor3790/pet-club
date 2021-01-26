@@ -14,7 +14,10 @@ jQuery(document).ready(function ($) {
             tpc_marital_status: {
                 required: true
             },
-            tpc_birthdate: {
+            'tpc_occupation[]': {
+                required: true
+            },
+            tpc_birthdate_dummy: {
                 required: true
             },
             tpc_home_phone: {
@@ -34,7 +37,11 @@ jQuery(document).ready(function ($) {
             }
             else if( element.attr('name') === 'tpc_marital_status' ) {
                 error.appendTo( '.tpc-marital-status-error' );
-            } else {
+            }
+            else if( element.attr('name') === 'tpc_occupation[]' ) {
+                error.appendTo( '.tpc-occupation-error' );
+            } 
+            else {
                 error.insertAfter( element );
             }
         },
@@ -45,7 +52,10 @@ jQuery(document).ready(function ($) {
             tpc_marital_status: {
                 required: 'Por favor selecciona tu estado civil.'
             },
-            tpc_birthdate: {
+            'tpc_occupation[]': {
+                required: 'Por favor selecciona una o varias opciones.'
+            },
+            tpc_birthdate_dummy: {
                 required: 'Por favor ingresa tu fecha de nacimiento.'
             },
             tpc_home_phone: {

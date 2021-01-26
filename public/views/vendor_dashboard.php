@@ -104,27 +104,28 @@ if(empty($preference))
                   </fieldset>
                </div>
                <div class="form-group">
+                  <div class="tpc-occupation-error"></div>
                   <fieldset class="form-group">
                      <p>¿A qué te dedicas actualmente? Selecciona una o varias opciones.</p>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_full_time_job" value="Trabajo tiempo completo">
-                        <label class="form-check-label" for="tpc_full_time_job">Trabajo tiempo completo</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_occupation[]" value="Trabajo tiempo completo">
+                        <label class="form-check-label" for="tpc_occupation[]">Trabajo tiempo completo</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_part_time_job" value="Trabajo medio tiempo">
-                        <label class="form-check-label" for="tpc_part_time_job">Trabajo medio tiempo</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_occupation[]" value="Trabajo medio tiempo">
+                        <label class="form-check-label" for="tpc_occupation[]">Trabajo medio tiempo</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_student" value="Soy estudiante">
-                        <label class="form-check-label" for="tpc_student">Soy estudiante</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_occupation[]" value="Soy estudiante">
+                        <label class="form-check-label" for="tpc_occupation[]">Soy estudiante</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_unemployed" value="No trabajo">
-                        <label class="form-check-label" for="tpc_unemployed">No trabajo</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_occupation[]" value="No trabajo">
+                        <label class="form-check-label" for="tpc_occupation[]">No trabajo</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_home_office" value="Trabajo desde casa">
-                        <label class="form-check-label" for="tpc_home_office">Trabajo desde casa</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_occupation[]" value="Trabajo desde casa">
+                        <label class="form-check-label" for="tpc_occupation[]">Trabajo desde casa</label>
                      </div>
                   </fieldset>
                </div>

@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
             },
             tpc_zip_code: {
                 required: true,
-                rangelength: [4,6],
+                rangelength: [5,5],
                 digits: true
             },
             tpc_colony: {
@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
                 required: 'Por favor ingresa tu código postal.',
                 rangelength: jQuery
                             .validator
-                            .format("El código postal debe tener entre {0} y {1} caracteres. &nbsp;"),
+                            .format("El código postal debe tener {0} dígitos. &nbsp;"),
                 digits: 'El código postal no puede tener letras.'
             },
             tpc_colony: {

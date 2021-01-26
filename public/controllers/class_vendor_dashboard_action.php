@@ -74,15 +74,6 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $keeper_pi->set_options( $this->input_vars->personal_info, 'post' );
             $keeper_pi_data = $keeper_pi->get();
 
-            $occupation = array();
-
-            foreach ($this->input_vars->occupation_keys as $occupation_key) {
-                
-                if( isset( $keeper_pi_data[ $occupation_key ] ) )
-                    array_push( $occupation, $keeper_pi_data[ $occupation_key ] );
-
-            }
-
             $user_id = get_current_user_id();
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
 
@@ -91,7 +82,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 'kp_birthdate'      =>  $keeper_pi_data['tpc_birthdate'],
                 'kp_home_phone'     =>  $keeper_pi_data['tpc_home_phone'],
                 'kp_cellphone'      =>  $keeper_pi_data['tpc_cellphone'],
-                'kp_occupations'    =>  $occupation
+                'kp_occupations'    =>  $keeper_pi_data['tpc_occupation']
             ];
 
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );

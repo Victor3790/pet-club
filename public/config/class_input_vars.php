@@ -37,29 +37,15 @@ if(!class_exists('Tpc_Input_Vars'))
                 'validation' => [ 'Casado', 'Soltero', 'otro' ]
             ],
             [
-                'input_name' => 'tpc_full_time_job',
-                'type' => 'string',
-                'validation' => [ 'Trabajo tiempo completo' ]
-            ],
-            [
-                'input_name' => 'tpc_part_time_job',
-                'type' => 'string',
-                'validation' => [ 'Trabajo medio tiempo' ]
-            ],
-            [
-                'input_name' => 'tpc_student',
-                'type' => 'string',
-                'validation' => [ 'Soy estudiante' ]
-            ],
-            [
-                'input_name' => 'tpc_unemployed',
-                'type' => 'string',
-                'validation' => [ 'No trabajo' ]
-            ],
-            [
-                'input_name' => 'tpc_home_office',
-                'type' => 'string',
-                'validation' => [ 'Trabajo desde casa' ]
+                'input_name' => 'tpc_occupation', 
+                'type' => 'array', 
+                'validation' => [
+                    'Trabajo tiempo completo',
+                    'Trabajo medio tiempo',
+                    'Soy estudiante',
+                    'No trabajo',
+                    'Trabajo desde casa'
+                ]
             ],
             [
                 'input_name' => 'tpc_birthdate', 
@@ -78,14 +64,6 @@ if(!class_exists('Tpc_Input_Vars'))
                 'validation' => [ 10 ],
                 'sanitize' => true
             ]
-        ];
-
-        public $occupation_keys = [ 
-            'tpc_full_time_job',
-            'tpc_part_time_job',
-            'tpc_student',
-            'tpc_unemployed',
-            'tpc_home_office' 
         ];
 
         public $house_info = [

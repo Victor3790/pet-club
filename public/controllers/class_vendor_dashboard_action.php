@@ -5,21 +5,25 @@
 */
 
 require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_dashboard_action.php';
+require_once TPC_PLUGIN_PATH . 'public/config/class_input_vars.php';
 
 if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 {
     class Tpc_Vendor_Dashboard_Action extends Vk_Dashboard_Action
     {
         private $user_can = 'seller';
+        private $input_vars;
 
         public function __construct()
         {
             add_action('wp_ajax_tpc_register_keeper_address', [$this, 'tpc_register_keeper_address']);
-            add_action('wp_ajax_tpc_register_keeper_contact', [$this, 'tpc_register_keeper_contact']);
+            add_action('wp_ajax_tpc_register_keeper_personal_info', [$this, 'tpc_register_keeper_personal_info']);
             add_action('wp_ajax_tpc_register_keeper_house_info', [$this, 'tpc_register_keeper_house_info']);
             add_action('wp_ajax_tpc_register_keeper_services', [$this, 'tpc_register_keeper_services']);
 
             parent::__construct();
+
+            $this->input_vars =  new Tpc_Input_Vars();
         }
 
         public function tpc_register_keeper_address()
@@ -28,28 +32,9 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                                     'tpc_keeper_address_id', 
                                     $this->user_can);   
 
-            $info = [
-                        [
-                            'input_name' => 'tpc_street',
-                            'type' => 'string', 
-                            'min' => 10,
-                            'max' => 70
-                        ],
-                        [
-                            'input_name' => 'tpc_zip_code', 
-                            'type' => 'string', 
-                            'min' => 5
-                        ],
-                        [
-                            'input_name' => 'tpc_colony', 
-                            'type' => 'string', 
-                            'min' => 8,
-                            'max' => 150
-                        ]
-                    ];
-
-            $keeper_address = new Vk_Form_Data( $info );
-            $keeper_addr_data = $keeper_address->get_data();
+            $keeper_address = new vk_form_data\Data( new vk_form_data\input\Input );
+            $keeper_address->set_options( $this->input_vars->address, 'post' );
+            $keeper_addr_data = $keeper_address->get();
             $user_info = wp_get_current_user();
             $store_url = dokan_get_store_url( $user_info->ID );
 
@@ -79,47 +64,34 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
         }
         
 
-        public function tpc_register_keeper_contact()
+        public function tpc_register_keeper_personal_info()
         {
-            $this->vk_check_ajax(   'register_keeper_contact', 
-                                    'tpc_keeper_contact_id', 
+            $this->vk_check_ajax(   'register_keeper_personal_info', 
+                                    'tpc_keeper_personal_info_id', 
                                     $this->user_can);   
 
-            $info = [
-                        [
-                            'input_name' => 'tpc_gender', 
-                            'type' => 'string', 
-                            'min' => 5,
-                            'max' => 6
-                        ],
-                        [
-                            'input_name' => 'tpc_birthdate', 
-                            'type' => 'string', 
-                            'min' => 10
-                        ],
-                        [
-                            'input_name' => 'tpc_home_phone', 
-                            'type' => 'string', 
-                            'min' => 10
-                        ],
-                        [
-                            'input_name' => 'tpc_cellphone', 
-                            'type' => 'string', 
-                            'min' => 10
-                        ]
-                    ];
+            $keeper_pi = new vk_form_data\Data( new vk_form_data\input\Input );
+            $keeper_pi->set_options( $this->input_vars->personal_info, 'post' );
+            $keeper_pi_data = $keeper_pi->get();
 
-            $keeper_contact = new Vk_Form_Data( $info );
-            $keeper_cont_data = $keeper_contact->get_data();
+            $occupation = array();
+
+            foreach ($this->input_vars->occupation_keys as $occupation_key) {
+                
+                if( isset( $keeper_pi_data[ $occupation_key ] ) )
+                    array_push( $occupation, $keeper_pi_data[ $occupation_key ] );
+
+            }
 
             $user_id = get_current_user_id();
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
 
             $post_data = [
-                'kp_gender'     =>  $keeper_cont_data['tpc_gender'],
-                'kp_birthdate'  =>  $keeper_cont_data['tpc_birthdate'],
-                'kp_home_phone' =>  $keeper_cont_data['tpc_home_phone'],
-                'kp_cellphone'  =>  $keeper_cont_data['tpc_cellphone']
+                'kp_gender'         =>  $keeper_pi_data['tpc_gender'],
+                'kp_birthdate'      =>  $keeper_pi_data['tpc_birthdate'],
+                'kp_home_phone'     =>  $keeper_pi_data['tpc_home_phone'],
+                'kp_cellphone'      =>  $keeper_pi_data['tpc_cellphone'],
+                'kp_occupations'    =>  $occupation
             ];
 
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
@@ -133,49 +105,10 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                                     'tpc_keeper_house_id', 
                                     $this->user_can);   
 
-            $info = [
-                        [
-                            'input_name' => 'tpc_attachments', 
-                            'type' => 'string', 
-                            'min' => 1,
-                            'max' => 90
-                        ],
-                        [
-                            'input_name' => 'tpc_home', 
-                            'type' => 'string', 
-                            'min' => 4,
-                            'max' => 11
-                        ],
-                        [
-                            'input_name' => 'tpc_injection', 
-                            'type' => 'string', 
-                            'min' => 18
-                        ],
-                        [
-                            'input_name' => 'tpc_special_care', 
-                            'type' => 'string', 
-                            'min' => 19
-                        ],
-                        [
-                            'input_name' => 'tpc_marital_status',
-                            'type' => 'string',
-                            'min' => 4,
-                            'max' => 7
-                        ],
-                        [
-                            'input_name' => 'tpc_kids', 
-                            'type' => 'string', 
-                            'min' => 5
-                        ],
-                        [
-                            'input_name' => 'tpc_pets', 
-                            'type' => 'string', 
-                            'min' => 8
-                        ],
-                    ];
-
-            $keeper_house_info = new Vk_Form_Data( $info );
-            $keeper_hi_data = $keeper_house_info->get_data();
+            $keeper_house_info = new vk_form_data\Data( new vk_form_data\input\Input );
+            $keeper_house_info->set_options( $this->input_vars->house_info, 'post' );
+            $keeper_hi_data = $keeper_house_info->get();
+            $free_spaces = array();
 
             $user_id = get_current_user_id();
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
@@ -193,29 +126,37 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             }
 
+            foreach ($this->input_vars->free_space_keys as $free_space_key) {
+                
+                if( isset( $keeper_hi_data[ $free_space_key ] ) )
+                    array_push( $free_spaces, $keeper_hi_data[ $free_space_key ] );
+
+            }
+
             $post_data = [
                 'kp_house'          =>  $keeper_hi_data['tpc_home'],
                 'kp_marital_status' =>  $keeper_hi_data['tpc_marital_status'],
+                'kp_free_spaces'    =>  $free_spaces
             ];
 
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
 
-            if( !$result )
-                $this->vk_send_result( $result );
+            /*if( !$result )
+                $this->vk_send_result( $result );*/
 
             /*if( isset( $keeper_hi_data['tpc_special_care'] ) )
-                $post_data['kp_special_care'] = $keeper_hi_data['tpc_special_care'];
+                $post_data['kp_special_care'] = $keeper_hi_data['tpc_special_care'];*/
 
-            if( isset( $keeper_hi_data['tpc_injection'] ) )
-                $post_data['kp_injection'] = $keeper_hi_data['tpc_injection'];
+            /*if( isset( $keeper_hi_data['tpc_injection'] ) )
+                $post_data['kp_injection'] = $keeper_hi_data['tpc_injection'];*/
 
-            if( isset( $keeper_hi_data['tpc_kids'] ) )
+            /*if( isset( $keeper_hi_data['tpc_kids'] ) )
                 $post_data['kp_kids'] = $keeper_hi_data['tpc_kids'];
 
             if( isset( $keeper_hi_data['tpc_pets'] ) )
                 $post_data['kp_pets'] = $keeper_hi_data['tpc_pets'];
 
-            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );*/
+            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
 
             $post_data = null;
 
@@ -229,7 +170,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $post_data = [ 'kp_abilities' => $abilities ];
 
-            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
+            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );*/
 
             $this->vk_send_result( $result );
         }

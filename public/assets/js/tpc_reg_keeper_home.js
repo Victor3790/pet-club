@@ -1,15 +1,22 @@
 jQuery(document).ready(function ($) {
 
     $('#tpc_keeper_home_form').validate({
+        ignore: [],
         errorLabelContainer: '.radio-home-error',
         rules: {
             tpc_home: {
+                required: true
+            },
+            tpc_attachments: {
                 required: true
             }
         },
         messages: {
             tpc_home: {
                 required: 'Por favor selecciona una opción.',
+            },
+            tpc_attachments: {
+                required: 'Por favor sube algunas imágenes.'
             }
         },
         submitHandler: function (form) {

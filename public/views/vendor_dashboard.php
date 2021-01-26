@@ -64,32 +64,82 @@ if(empty($preference))
                <div class="form-group">
                   <div class="tpc-gender-error"></div>
                   <fieldset>
-                     <legend>Soy :</legend>
+                     <p>Soy :</p>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_gender" value="Hombre" style="width:auto; margin-top:.3rem;">
-                        <label class="form-check-label tpc-form__radio-label" for="tpc_gender">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_gender" value="Hombre">
+                        <label class="form-check-label tpc-form__radio-label gender" for="tpc_gender">
                            Hombre
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_gender" value="Mujer" style="width:auto; margin-top:.3rem;">
-                        <label class="form-check-label tpc-form__radio-label" for="tpc_gender">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_gender" value="Mujer">
+                        <label class="form-check-label tpc-form__radio-label gender" for="tpc_gender">
                            Mujer
                         </label>
                      </div>
                   </fieldset>
                </div>
                <div class="form-group">
-                  <label class="tpc-form__label" for="tpc_birthdate">Fecha de nacimiento: </label>
-                  <input class="tpc-form__input" type="text" id="tpc_birthdate" name="tpc_birthdate">
+                  <div class="tpc-marital-status-error"></div>
+                  <fieldset class="form-group">
+                     <p>Estado civil:</p>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_marital_status" value="Casado">
+                        <label class="form-check-label tpc-form__radio-label" for="tpc_marital_status">
+                           Casado
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_marital_status" value="Soltero">
+                        <label class="form-check-label tpc-form__radio-label" for="tpc_marital_status">
+                           Soltero
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_marital_status" value="otro">
+                        <label class="form-check-label tpc-form__radio-label" for="tpc_marital_status">
+                           Otro
+                        </label>
+                     </div>
+                  </fieldset>
+               </div>
+               <div class="form-group">
+                  <fieldset class="form-group">
+                     <p>¿A qué te dedicas actualmente? Selecciona una o varias opciones.</p>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_full_time_job" value="Trabajo tiempo completo">
+                        <label class="form-check-label" for="tpc_full_time_job">Trabajo tiempo completo</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_part_time_job" value="Trabajo medio tiempo">
+                        <label class="form-check-label" for="tpc_part_time_job">Trabajo medio tiempo</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_student" value="Soy estudiante">
+                        <label class="form-check-label" for="tpc_student">Soy estudiante</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_unemployed" value="No trabajo">
+                        <label class="form-check-label" for="tpc_unemployed">No trabajo</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_home_office" value="Trabajo desde casa">
+                        <label class="form-check-label" for="tpc_home_office">Trabajo desde casa</label>
+                     </div>
+                  </fieldset>
+               </div>
+               <div class="form-group">
+                  <label class="tpc-form__label" for="tpc_birthdate_dummy">Fecha de nacimiento: </label>
+                  <input class="tpc-form__input" type="text" id="tpc_birthdate_dummy" name="tpc_birthdate_dummy">
                </div>
                <div class="form-group">
                   <label class="tpc-form__label" for="tpc_home_phone">Teléfono de casa</label>
                   <input class="tpc-form__input" type="text" name="tpc_home_phone">
                   <label class="tpc-form__label" for="tpc_cellphone">Teléfono celular</label>
                   <input class="tpc-form__input" type="text" name="tpc_cellphone">
-                  <?php wp_nonce_field( 'register_keeper_contact', 'tpc_keeper_contact_id', false ); ?>
-                  <input type="hidden" name="action" value="tpc_register_keeper_contact">
+                  <?php wp_nonce_field( 'register_keeper_personal_info', 'tpc_keeper_personal_info_id', false ); ?>
+                  <input type="hidden" name="action" value="tpc_register_keeper_personal_info">
+                  <input type="hidden" name="tpc_birthdate" id="tpc_birthdate">
                   <input class="tpc-form__button" type="submit" value="Guardar">
                </div>
             </form>  
@@ -118,25 +168,30 @@ if(empty($preference))
                      </div>
                   </fieldset>
                   <fieldset class="form-group">
-                     <legend>Estado civil:</legend>
-                     <div class="radio-home-error"></div>
+                     <p>Selecciona los espacios libres que tiene tu hogar.</p>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_marital_status" value="Casado">
-                        <label class="form-check-label tpc-form__radio-label" for="tpc_marital_status">
-                           Casado
-                        </label>
+                        <input class="form-check-input" type="checkbox" name="tpc_front_yard" value="Jardín frontal">
+                        <label class="form-check-label" for="tpc_front_yard">Jardín frontal</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_marital_status" value="Soltero">
-                        <label class="form-check-label tpc-form__radio-label" for="tpc_marital_status">
-                           Soltero
-                        </label>
+                        <input class="form-check-input" type="checkbox" name="tpc_back_yard" value="Jardín trasero">
+                        <label class="form-check-label" for="tpc_back_yard">Jardín trasero</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_marital_status" value="otro">
-                        <label class="form-check-label tpc-form__radio-label" for="tpc_marital_status">
-                           Otro
-                        </label>
+                        <input class="form-check-input" type="checkbox" name="tpc_garage" value="Cochera">
+                        <label class="form-check-label" for="tpc_garage">Cochera</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_balcony" value="Balcón">
+                        <label class="form-check-label" for="tpc_balcony">Balcón</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_patio" value="Patio">
+                        <label class="form-check-label" for="tpc_patio">Patio</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="tpc_hallways" value="Pasillos laterales">
+                        <label class="form-check-label" for="tpc_hallways">Pasillos laterales</label>
                      </div>
                   </fieldset>
                   <fieldset class="form-group">

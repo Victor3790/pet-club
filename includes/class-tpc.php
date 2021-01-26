@@ -168,7 +168,7 @@ class Tpc {
 	 */
 	private function define_public_hooks() {
 
-		require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_form_data.php';
+		require_once TPC_PLUGIN_PATH . 'includes/vk_forms/Data.php';
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_html.php';
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_user_meta.php';
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_post_meta.php';

@@ -21,6 +21,11 @@
     margin-top: 35px!important;
 }
 
+.tpc-form__radio {
+    width:auto!important; 
+    margin-top:.3rem!important;
+}
+
 .tpc-form__radio-label
 {
     margin-left: 15px!important;

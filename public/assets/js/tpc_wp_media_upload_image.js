@@ -5,10 +5,10 @@ jQuery(document).ready(function ($) {
         frame: 'select',
         multiple: 'true',
         library: {
-            type: 'image/jpeg'
+            type: 'image'
         },
         button: {
-            text: 'Subir'
+            text: 'Aceptar'
         }
     });
 
@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
         frame: 'select',
         multiple: 'false',
         library: {
-            type: 'image/jpeg'
+            type: 'image'
         },
         button: {
             text: 'Seleccionar'

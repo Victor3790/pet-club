@@ -68,75 +68,98 @@ if(!class_exists('Tpc_Input_Vars'))
 
         public $house_info = [
             [
-                'input_name' => 'tpc_attachments', 
-                'type' => 'string', 
-                'validation' => [ 1, 90 ],
-                'sanitize' => true
-            ],
-            [
                 'input_name' => 'tpc_home', 
                 'type' => 'string', 
                 'validation' => [ 'Casa', 'Apartamento' ]
             ],
             [
-                'input_name' => 'tpc_front_yard', 
-                'type' => 'string', 
-                'validation' => [ 'Jardín frontal' ]
+                'input_name' => 'tpc_free_spaces',
+                'type' => 'array',
+                'validation' => [
+                    'Jardín frontal',
+                    'Jardín trasero',
+                    'Cochera',
+                    'Balcón',
+                    'Patio',
+                    'Pasillos laterales'
+                ]
             ],
             [
-                'input_name' => 'tpc_back_yard', 
-                'type' => 'string', 
-                'validation' => [ 'Jardín trasero' ]
+                'input_name' => 'tpc_kids',
+                'type' => 'string',
+                'validation' => [ 'Sí', 'No' ]
             ],
             [
-                'input_name' => 'tpc_garage', 
-                'type' => 'string', 
-                'validation' => [ 'Cochera' ]
+                'input_name' => 'tpc_pets',
+                'type' => 'array',
+                'validation' => [
+                    'Tengo perros',
+                    'Tengo gatos',
+                    'No tengo mascotas'
+                ]
             ],
             [
-                'input_name' => 'tpc_balcony', 
-                'type' => 'string', 
-                'validation' => [ 'Balcón' ]
+                'input_name' => 'tpc_furniture',
+                'type' => 'string',
+                'validation' => [ 'Sí', 'No' ]
             ],
             [
-                'input_name' => 'tpc_patio', 
-                'type' => 'string', 
-                'validation' => [ 'Patio' ]
+                'input_name' => 'tpc_smoking',
+                'type' => 'string',
+                'validation' => [ 'Sí', 'No' ]
             ],
             [
-                'input_name' => 'tpc_hallways', 
+                'input_name' => 'tpc_attachments', 
                 'type' => 'string', 
-                'validation' => [ 'Pasillos laterales' ]
+                'validation' => [ 1, 90 ],
+                'sanitize' => true
             ],
-            /*[
-                'input_name' => 'tpc_kids', 
-                'type' => 'string', 
-                'validation' => [ 'Niños' ]
-            ],
-            [
-                'input_name' => 'tpc_pets', 
-                'type' => 'string', 
-                'validation' => [ 'Mascotas' ]
-            ]*/
-            /*[
-                'input_name' => 'tpc_injection', 
-                'type' => 'string', 
-                'min' => 18
-            ],
-            [
-                'input_name' => 'tpc_special_care', 
-                'type' => 'string', 
-                'min' => 19
-            ]*/
         ];
 
-        public $free_space_keys = [ 
-            'tpc_front_yard',
-            'tpc_back_yard',
-            'tpc_garage',
-            'tpc_balcony',
-            'tpc_patio',
-            'tpc_hallways'
+        public $service_info = [
+            [
+                'input_name' => 'tpc_experience',
+                'type' => 'numeric',
+                'validation' => [ 0, 50 ]
+            ],
+            [
+                'input_name' => 'tpc_abilities',
+                'type' => 'array',
+                'validation' => [
+                    'Aplicación de inyecciones',
+                    'Cuidados especiales',
+                    'Cuidado de cachorros',
+                    'Ninguna'
+                ]
+            ],
+            [
+                'input_name' => 'tpc_pet_client',
+                'type' => 'array',
+                'validation' => [
+                    'tpc_dog',
+                    'tpc_cat'
+                ]
+            ],
+            [
+                'input_name' => 'tpc_service',
+                'type' => 'array',
+                'validation' => [
+                    'tpc_lodging',
+                    'tpc_day_care',
+                    'tpc_walk'
+                ]
+            ],
+            [
+                'input_name' => 'tpc_description',
+                'type' => 'string',
+                'validation' => [ 10, 250 ],
+                'sanitize' => true
+            ],
+            [
+                'input_name' => 'tpc_thumbnail', 
+                'type' => 'numeric', 
+                'validation' => [ 0, 1000000 ]
+            ]
         ];
 
     }

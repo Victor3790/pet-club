@@ -146,23 +146,21 @@ if(empty($preference))
             </form>  
        </div>
        <div id="step-3" class="tab-pane" role="tabpanel">
-            <h3>Sube algunas imagenes para conocerte mejor.</h3>
-            <a href="#" id="tpc_open_attachment_uploader" class="btn btn-primary">Subir imagenes</a>
             <h3>Tu casa</h3>
             <p>Requerimos tu información acerca del espacio donde cuidarás a las mascotas.</p>
             <form class="tpc-form" id="tpc_keeper_home_form" autocomplete="off">
                <div class="form-group">
                   <fieldset class="form-group">
-                     <legend>Vives en:</legend>
-                     <div class="radio-home-error"></div>
+                     <p>Vives en:</p>
+                     <div class="tpc_home_error"></div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_home" value="Casa">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_home" value="Casa">
                         <label class="form-check-label tpc-form__radio-label" for="tpc_home">
                            Casa
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tpc_home" value="Apartmento">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_home" value="Apartamento">
                         <label class="form-check-label tpc-form__radio-label" for="tpc_home">
                            Apartamento
                         </label>
@@ -170,55 +168,87 @@ if(empty($preference))
                   </fieldset>
                   <fieldset class="form-group">
                      <p>Selecciona los espacios libres que tiene tu hogar.</p>
+                     <div class="tpc_free_spaces_error"></div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_front_yard" value="Jardín frontal">
-                        <label class="form-check-label" for="tpc_front_yard">Jardín frontal</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_free_spaces[]" value="Jardín frontal">
+                        <label class="form-check-label" for="tpc_free_spaces[]">Jardín frontal</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_back_yard" value="Jardín trasero">
-                        <label class="form-check-label" for="tpc_back_yard">Jardín trasero</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_free_spaces[]" value="Jardín trasero">
+                        <label class="form-check-label" for="tpc_free_spaces[]">Jardín trasero</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_garage" value="Cochera">
-                        <label class="form-check-label" for="tpc_garage">Cochera</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_free_spaces[]" value="Cochera">
+                        <label class="form-check-label" for="tpc_free_spaces[]">Cochera</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_balcony" value="Balcón">
-                        <label class="form-check-label" for="tpc_balcony">Balcón</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_free_spaces[]" value="Balcón">
+                        <label class="form-check-label" for="tpc_free_spaces[]">Balcón</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_patio" value="Patio">
-                        <label class="form-check-label" for="tpc_patio">Patio</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_free_spaces[]" value="Patio">
+                        <label class="form-check-label" for="tpc_free_spaces[]">Patio</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_hallways" value="Pasillos laterales">
-                        <label class="form-check-label" for="tpc_hallways">Pasillos laterales</label>
-                     </div>
-                  </fieldset>
-                  <fieldset class="form-group">
-                     <legend>Tu familia:</legend>
-                     <p>¿Hay niños o mascotas en tu casa? Selecciona una o varias opciones.</p>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_kids" value="Niños">
-                        <label class="form-check-label" for="tpc_kids">Niños</label>
-                     </div>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_pets" value="Mascotas">
-                        <label class="form-check-label" for="tpc_pets">Mascotas</label>
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_free_spaces[]" value="Pasillos laterales">
+                        <label class="form-check-label" for="tpc_free_spaces[]">Pasillos laterales</label>
                      </div>
                   </fieldset>
                   <fieldset class="form-group">
-                     <legend>Habilidades especiales:</legend>
-                     <p>¿Tienes alguna habilidad especial? Selecciona una o varias opciones.</p>
+                     <p>¿Hay niños presentes?.</p>
+                     <div class="tpc_kids_error"></div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_injection" value="Aplica inyecciones">
-                        <label class="form-check-label" for="tpc_injection">Aplicación de inyecciones</label>
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_kids" value="Sí">
+                        <label class="form-check-label" for="tpc_kids">Sí</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_special_care" value="Cuidados especiales">
-                        <label class="form-check-label" for="tpc_special_care">Cuidados especiales</label>
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_kids" value="No">
+                        <label class="form-check-label" for="tpc_kids">No</label>
                      </div>
                   </fieldset>
+                  <fieldset class="form-group">
+                     <p>¿Hay perros y / o gatos en tu casa?.</p>
+                     <div class="tpc_pets_error"></div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="Tengo perros">
+                        <label class="form-check-label" for="tpc_pets[]">Tengo perros</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="Tengo gatos">
+                        <label class="form-check-label" for="tpc_pets[]">Tengo gatos</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="No tengo mascotas">
+                        <label class="form-check-label" for="tpc_pets[]">No tengo mascotas</label>
+                     </div>
+                  </fieldset>
+                  <fieldset class="form-group">
+                     <p>¿Permites que los perros se suban a los muebles?</p>
+                     <div class="tpc_furniture_error"></div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_furniture" value="Sí">
+                        <label class="form-check-label" for="tpc_furniture">Sí</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_furniture" value="No">
+                        <label class="form-check-label" for="tpc_furniture">No</label>
+                     </div>
+                  </fieldset>
+                  <fieldset class="form-group">
+                     <p>¿Fuman dentro de tu casa?</p>
+                     <div class="tpc_smoking_error"></div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_smoking" value="Sí">
+                        <label class="form-check-label" for="tpc_smoking">Sí</label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="radio" name="tpc_smoking" value="No">
+                        <label class="form-check-label" for="tpc_smoking">No</label>
+                     </div>
+                  </fieldset>
+                  <h5>Sube algunas imagenes para conocerte mejor.</h5>
+                  <a href="#" id="tpc_open_attachment_uploader" class="btn btn-primary">Subir imagenes</a>
+                  <div class="tpc_attachments_error"></div>
                   <input type="hidden" name="tpc_attachments" id="tpc_attachments">
                   <?php wp_nonce_field( 'register_keeper_home_info', 'tpc_keeper_house_id', false ); ?>
                   <input type="hidden" name="action" value="tpc_register_keeper_house_info">
@@ -228,50 +258,67 @@ if(empty($preference))
        </div>
        <div id="step-4" class="tab-pane" role="tabpanel">
             <h3>Los servicios que ofreces.</h3>
-            <p>Manejamos precios fijos, y una comisión del __%.</p>
-            <h5>Selecciona una imagen para que aparezca en la parte principal de tu perfil.</h5>
-            <a href="#" id="tpc_open_thumbnail_uploader" class="btn btn-primary">Seleccionar</a><br><br>
             <form class="tpc-form" id="tpc_keeper_services" autocomplete="off">
+               <fieldset class="form-group">
+                  <label class="tpc-form__label" for="tpc_experience">¿Cuántos años llevas cuidando mascotas?</label>
+                  <input class="tpc-form__input" type="number" name="tpc_experience" style="width:100px;">
+               </fieldset>
+               <fieldset class="form-group">
+                  <p>¿Tienes alguna habilidad o servicio especial? Selecciona una o varias opciones.</p>
+                  <div class="tpc_abilities_error"></div>
+                  <div class="form-check">
+                     <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_abilities[]" value="Aplicación de inyecciones">
+                     <label class="form-check-label" for="tpc_abilities[]">Aplicación de inyecciones</label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_abilities[]" value="Cuidados especiales">
+                     <label class="form-check-label" for="tpc_abilities[]">Cuidados especiales</label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_abilities[]" value="Cuidado de cachorros">
+                     <label class="form-check-label" for="tpc_abilities[]">Cuidado de cachorros</label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_abilities[]" value="Ninguna">
+                     <label class="form-check-label" for="tpc_abilities[]">Ninguna</label>
+                  </div>
+               </fieldset>
                <div class="form-group">
                   <fieldset class="form-group">
-                     <legend>Selecciona los servicios que ofrecerás</legend>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_lodging" value="true">
-                        <label class="form-check-label" for="tpc_lodging">
-                           Hospedaje ($200.00)
-                        </label>
-                     </div>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_day_care" value="true">
-                        <label class="form-check-label" for="tpc_day_care">
-                           Guardería ($180.00)
-                        </label>
-                     </div>
-                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_hour_walk" value="true">
-                        <label class="form-check-label" for="tpc_hour_walk">
-                           Paseo x hora ($180.00)
-                        </label>
-                     </div>
-                     <!--<div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_half_walk" value="true">
-                        <label class="form-check-label" for="tpc_half_walk">
-                           Paseo 30 min ($80.00)
-                        </label>
-                     </div>-->
-                  </fieldset>
-                  <fieldset class="form-group">
                      <legend>Selecciona las máscotas que atenderás.</legend>
+                     <div class="tpc_pet_client_error"></div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_dog" value="true">
-                        <label class="form-check-label" for="tpc_dog">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_dog">
+                        <label class="form-check-label" for="tpc_pet_client[]">
                            Perro
                         </label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="tpc_cat" value="true">
-                        <label class="form-check-label" for="tpc_cat">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_cat">
+                        <label class="form-check-label" for="tpc_pet_client[]">
                            Gato
+                        </label>
+                     </div>
+                  </fieldset>
+                  <fieldset class="form-group">
+                     <legend>Selecciona los servicios que ofrecerás</legend>
+                     <div class="tpc_service_error"></div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_lodging">
+                        <label class="form-check-label" for="tpc_service[]">
+                           Hospedaje ($200.00)
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_day_care">
+                        <label class="form-check-label" for="tpc_service[]">
+                           Guardería ($180.00)
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_walk">
+                        <label class="form-check-label" for="tpc_service[]">
+                           Paseo x hora ($180.00)
                         </label>
                      </div>
                   </fieldset>
@@ -281,6 +328,9 @@ if(empty($preference))
                         <textarea name="tpc_description" id="tpc_description" cols="30" rows="10" required></textarea>
                      </div>
                   </fieldset>
+                  <h5>Selecciona una imagen para que aparezca en la parte principal de tu perfil.</h5>
+                  <div class="tpc_thumbnail_error"></div>
+                  <a href="#" id="tpc_open_thumbnail_uploader" class="btn btn-primary">Seleccionar</a><br>
                   <input type="hidden" name="tpc_thumbnail" id="tpc_thumbnail">
                   <?php wp_nonce_field( 'register_keeper_services', 'tpc_keeper_services_id', false ); ?>
                   <input type="hidden" name="action" value="tpc_register_keeper_services">
@@ -289,6 +339,11 @@ if(empty($preference))
             </form> 
        </div>
        <div id="step-5" class="tab-pane" role="tabpanel">
+         <h5>Pago de membresía</h5>
+         <p>
+            La membresía de The Pet Club tiene un costo de $--- pesos, la puedes pagar desde 
+            Mercado Pago haciendo click en el botón de abajo.
+         </p>
          <script
             src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
             data-preference-id="<?php echo $preference->id; ?>">

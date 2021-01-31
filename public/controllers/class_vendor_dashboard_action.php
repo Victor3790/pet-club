@@ -79,10 +79,11 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $post_data = [
                 'kp_gender'         =>  $keeper_pi_data['tpc_gender'],
+                'kp_marital_status' =>  $keeper_pi_data['tpc_marital_status'],
+                'kp_occupations'    =>  $keeper_pi_data['tpc_occupation'],
                 'kp_birthdate'      =>  $keeper_pi_data['tpc_birthdate'],
                 'kp_home_phone'     =>  $keeper_pi_data['tpc_home_phone'],
                 'kp_cellphone'      =>  $keeper_pi_data['tpc_cellphone'],
-                'kp_occupations'    =>  $keeper_pi_data['tpc_occupation']
             ];
 
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
@@ -99,7 +100,6 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $keeper_house_info = new vk_form_data\Data( new vk_form_data\input\Input );
             $keeper_house_info->set_options( $this->input_vars->house_info, 'post' );
             $keeper_hi_data = $keeper_house_info->get();
-            $free_spaces = array();
 
             $user_id = get_current_user_id();
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
@@ -117,168 +117,82 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             }
 
-            foreach ($this->input_vars->free_space_keys as $free_space_key) {
-                
-                if( isset( $keeper_hi_data[ $free_space_key ] ) )
-                    array_push( $free_spaces, $keeper_hi_data[ $free_space_key ] );
-
-            }
-
             $post_data = [
                 'kp_house'          =>  $keeper_hi_data['tpc_home'],
-                'kp_marital_status' =>  $keeper_hi_data['tpc_marital_status'],
-                'kp_free_spaces'    =>  $free_spaces
+                'kp_free_spaces'    =>  $keeper_hi_data['tpc_free_spaces'],
+                'kp_kids'           =>  $keeper_hi_data['tpc_kids'],
+                'kp_pets'           =>  $keeper_hi_data['tpc_pets'],
+                'kp_furniture'      =>  $keeper_hi_data['tpc_furniture'],
+                'kp_smoking'        =>  $keeper_hi_data['tpc_smoking']
             ];
 
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
-
-            /*if( !$result )
-                $this->vk_send_result( $result );*/
-
-            /*if( isset( $keeper_hi_data['tpc_special_care'] ) )
-                $post_data['kp_special_care'] = $keeper_hi_data['tpc_special_care'];*/
-
-            /*if( isset( $keeper_hi_data['tpc_injection'] ) )
-                $post_data['kp_injection'] = $keeper_hi_data['tpc_injection'];*/
-
-            /*if( isset( $keeper_hi_data['tpc_kids'] ) )
-                $post_data['kp_kids'] = $keeper_hi_data['tpc_kids'];
-
-            if( isset( $keeper_hi_data['tpc_pets'] ) )
-                $post_data['kp_pets'] = $keeper_hi_data['tpc_pets'];
-
-            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
-
-            $post_data = null;
-
-            $abilities = array();
-
-            if( isset( $keeper_hi_data['tpc_special_care'] ) )
-                array_push( $abilities, 'Cuidados especiales' );
-
-            if( isset( $keeper_hi_data['tpc_injection'] ) )
-                array_push( $abilities, 'Aplicación de injecciones' );
-
-            $post_data = [ 'kp_abilities' => $abilities ];
-
-            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );*/
 
             $this->vk_send_result( $result );
         }
 
         public function tpc_register_keeper_services()
         {
-            $this->vk_check_ajax( 'register_keeper_services', 'tpc_keeper_services_id', $this->user_can);   
+            $this->vk_check_ajax(   'register_keeper_services', 
+                                    'tpc_keeper_services_id', 
+                                    $this->user_can);   
 
-            $info = [
-                        [
-                            'input_name' => 'tpc_lodging', 
-                            'type' => 'string', 
-                            'min' => 4
-                        ],
-                        [
-                            'input_name' => 'tpc_day_care', 
-                            'type' => 'string', 
-                            'min' => 4
-                        ],
-                        [
-                            'input_name' => 'tpc_hour_walk', 
-                            'type' => 'string', 
-                            'min' => 4
-                        ],
-                        /*[
-                            'input_name' => 'tpc_half_walk', 
-                            'type' => 'string', 
-                            'min' => 4
-                        ],*/
-                        [
-                            'input_name' => 'tpc_description', 
-                            'type' => 'string', 
-                            'min' => 10,
-                            'max' => 250
-                        ],
-                        [
-                            'input_name' => 'tpc_thumbnail', 
-                            'type' => 'numeric', 
-                            'min' => 1,
-                            'max' => 30
-                        ],
-                        [
-                            'input_name' => 'tpc_dog', 
-                            'type' => 'string', 
-                            'min' => 4
-                        ],
-                        [
-                            'input_name' => 'tpc_cat', 
-                            'type' => 'string', 
-                            'min' => 4
-                        ]
-                    ];
-
-            $keeper_services = new Vk_Form_Data( $info );
-            $keeper_serv_data = $keeper_services->get_data();
-
-            $products = array();
-
-            foreach ( $keeper_serv_data as $key => $value ) {
-                
-                if( $key != 'tpc_dog' && 
-                    $key != 'tpc_cat' && 
-                    $key != 'tpc_description' &&
-                    $key != 'tpc_thumbnail'
-                )
-                    $products[$key] = $value;
-
-            }
-
-            $this->tpc_register_products( $products );
+            $keeper_services_info = new vk_form_data\Data( new vk_form_data\input\Input );
+            $keeper_services_info->set_options( $this->input_vars->service_info, 'post' );
+            $keeper_services_data = $keeper_services_info->get();
 
             $user_id = get_current_user_id();
             $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
 
-            $post_data = array();
+            $services = $keeper_services_data['tpc_service'];
 
-            if( isset( $keeper_serv_data['tpc_lodging'] ) )
-                $post_data['kp_lodging'] = $keeper_serv_data['tpc_lodging'];
+            $this->create_products( $services );
 
-            if( isset( $keeper_serv_data['tpc_day_care'] ) )
-                $post_data['kp_day_care'] = $keeper_serv_data['tpc_day_care'];
+            $this->register_split_data( $keeper_post_id, $services );
 
-            if( isset( $keeper_serv_data['tpc_hour_walk'] ) )
-                $post_data['kp_hour_walk'] = $keeper_serv_data['tpc_hour_walk'];
+            $pets = $keeper_services_data['tpc_pet_client'];
 
-            /*if( isset( $keeper_serv_data['tpc_half_walk'] ) )
-                $post_data['kp_half_walk'] = $keeper_serv_data['tpc_half_walk'];*/
+            $this->register_split_data( $keeper_post_id, $pets );
 
-            if( isset( $keeper_serv_data['tpc_dog'] ) )
-                $post_data['kp_dog'] = $keeper_serv_data['tpc_dog'];
-            
-            if( isset( $keeper_serv_data['tpc_cat'] ) )
-                $post_data['kp_cat'] = $keeper_serv_data['tpc_cat'];
+            $post_data = [
+                'kp_experience'     => $keeper_services_data['tpc_experience'],
+                'kp_abilities'      => $keeper_services_data['tpc_abilities']
+            ];
 
-            if( isset( $keeper_serv_data['tpc_thumbnail'] ) )
-                $thumbnail_id = $keeper_serv_data['tpc_thumbnail'];
+            $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
 
-            Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
-
-            $postarr = [
+            $post_content = [
                 'ID'    => $keeper_post_id,
                 'post_content' => $keeper_serv_data['tpc_description']
             ];
     
-            wp_update_post( $postarr );
+            wp_update_post( $post_content );
             set_post_thumbnail( $keeper_post_id, $thumbnail_id );
 
-            $meta = [
+            /*$registered = [
                 'tpc_vendor_registration' => true
             ];
 
-            $result = Vk_User_Meta::register_current_user_meta( $meta );
+            $result = Vk_User_Meta::register_current_user_meta( $registered );*/
 
             $this->vk_send_result( $result );
         }
 
-        private function tpc_register_products( $services )
+        private function register_split_data( $post_id, $data )
+        {
+            $post_keys = str_replace( 'tpc', 'kp', $data ); 
+            $post_data = array();
+
+            foreach ( $post_keys as $key ) {
+                
+                $post_data[$key] = true;
+
+            }
+
+            Vk_Post_Meta::register_meta( $post_id, $post_data );
+        }
+
+        private function create_products( $services )
         {
             $user_id = get_current_user_id();
             $service_name = '';
@@ -297,15 +211,10 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                         $service_name = 'Guardería';
                     break;
 
-                    case 'tpc_hour_walk':
+                    case 'tpc_walk':
                         $service_id = 730;
                         $service_name = 'Paseo de una hora para perro.';
                     break;
-
-                    /*case 'tpc_half_walk':
-                        $service_id = 883;
-                        $service_name = 'Paseo de media hora para perro.';
-                    break;*/
                     
                     default:
                         throw new Exception(

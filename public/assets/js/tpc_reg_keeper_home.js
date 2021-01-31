@@ -2,9 +2,23 @@ jQuery(document).ready(function ($) {
 
     $('#tpc_keeper_home_form').validate({
         ignore: [],
-        errorLabelContainer: '.radio-home-error',
         rules: {
             tpc_home: {
+                required: true
+            },
+            'tpc_free_spaces[]': {
+                required: true
+            },
+            tpc_kids: {
+                required: true
+            },
+            'tpc_pets[]': {
+                required: true
+            },
+            tpc_furniture: {
+                required: true
+            },
+            tpc_smoking: {
                 required: true
             },
             tpc_attachments: {
@@ -13,10 +27,48 @@ jQuery(document).ready(function ($) {
         },
         messages: {
             tpc_home: {
-                required: 'Por favor selecciona una opción.',
+                required: 'Por favor selecciona el lugar donde vives.'
+            },
+            'tpc_free_spaces[]': {
+                required: 'Por favor selecciona uno o más espacios'
+            },
+            tpc_kids: {
+                required: 'Por favor selecciona "Sí" o "No"'
+            },
+            'tpc_pets[]': {
+                required: 'Por favor selecciona una o varias opciones'
+            },
+            tpc_furniture: {
+                required: 'Por favor selecciona "Sí" o "No"'
+            },
+            tpc_smoking: {
+                required: 'Por favor selecciona "Sí" o "No"'
             },
             tpc_attachments: {
                 required: 'Por favor sube algunas imágenes.'
+            }
+        },
+        errorPlacement: function ( error, element ) {
+            if( element.attr( 'name' ) === 'tpc_home' ) {
+                error.appendTo( '.tpc_home_error' );
+            }
+            else if( element.attr( 'name' ) === 'tpc_free_spaces[]' ) {
+                error.appendTo( '.tpc_free_spaces_error' );
+            }
+            else if( element.attr( 'name' ) === 'tpc_kids' ) {
+                error.appendTo( '.tpc_kids_error' );
+            }
+            else if( element.attr( 'name' ) === 'tpc_pets[]' ) {
+                error.appendTo( '.tpc_pets_error' );
+            }
+            else if( element.attr( 'name' ) === 'tpc_furniture' ) {
+                error.appendTo( '.tpc_furniture_error' );
+            }
+            else if( element.attr( 'name' ) === 'tpc_smoking' ) {
+                error.appendTo( '.tpc_smoking_error' );
+            }
+            else if( element.attr( 'name' ) === 'tpc_attachments' ) {
+                error.appendTo( '.tpc_attachments_error' );
             }
         },
         submitHandler: function (form) {

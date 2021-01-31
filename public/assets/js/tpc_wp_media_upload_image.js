@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
     attachment_uploader = wp.media({
         title: 'Selecciona o sube imagenes de tu casa.',
         frame: 'select',
-        multiple: 'true',
+        multiple: true,
         library: {
             type: 'image'
         },
@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
     thumbnail_uploader = wp.media({
         title: 'Selecciona una imagen',
         frame: 'select',
-        multiple: 'false',
+        multiple: false,
         library: {
             type: 'image'
         },

@@ -7,7 +7,7 @@
 require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_dashboard.php';
 
 // SDK de Mercado Pago
-require TPC_PLUGIN_PATH .  'vendor/autoload.php';
+require_once TPC_PLUGIN_PATH .  'vendor/autoload.php';
 
 // Agrega credenciales
 MercadoPago\SDK::setAccessToken('TEST-5405902477656417-122921-dba0b225aeb1405f5d82a2c5fe872098-172563922');
@@ -48,7 +48,12 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
             $item->title = 'Mi producto';
             $item->quantity = 1;
             $item->unit_price = 75.56;
-            $preference->notification_url = get_rest_url(null, 'tpc/v1/subscription');
+            $preference->notification_url = get_rest_url(null, 'tpc/v1/subscription?source_news=webhooks');
+            $preference->back_urls = array( 
+                        'success' => home_url('success'),
+                        'failure' => home_url('failure')
+                    );
+            $preference->external_reference = get_current_user_id();
             $preference->items = array($item);
             $preference->save();
 

@@ -163,17 +163,19 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $post_content = [
                 'ID'    => $keeper_post_id,
-                'post_content' => $keeper_serv_data['tpc_description']
+                'post_content' => $keeper_services_data['tpc_description']
             ];
+
+            $thumbnail_id = $keeper_services_data['tpc_thumbnail'];
     
             wp_update_post( $post_content );
             set_post_thumbnail( $keeper_post_id, $thumbnail_id );
 
-            /*$registered = [
-                'tpc_vendor_registration' => true
+            $registered = [
+                'tpc_vendor_registration' => false
             ];
 
-            $result = Vk_User_Meta::register_current_user_meta( $registered );*/
+            $result = Vk_User_Meta::register_current_user_meta( $registered );
 
             $this->vk_send_result( $result );
         }

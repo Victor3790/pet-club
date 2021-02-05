@@ -173,7 +173,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $registered = [
                 'tpc_vendor_registration' => true,
-                'tpc_vendor_subscription' => ['status' => 101, 'message' => 'Waiting']
+                'tpc_vendor_subscription' => ['status' => 101, 'message' => 'Pending']
             ];
 
             $result = Vk_User_Meta::register_current_user_meta( $registered );

@@ -38,12 +38,17 @@ if(!class_exists('Vk_Dashboard'))
                     'vk_security: There are arguments with the wrong format (type).' , 
                     1
                 );
+
+            $user_permission = current_user_can($permission);
+            $admin_permission = current_user_can('administrator');
     
-            if( !current_user_can($permission) )
-                throw new Exception(
-                    'vk_security: The user does not have enough permissions.' , 
-                    1
-                );
+            if( !$user_permission ) {
+                if( !$admin_permission )
+                    throw new Exception(
+                        'vk_security: The user does not have enough permissions.' , 
+                        1
+                    );
+            }
         }
 
         protected function vk_load_view( $file=null, $params=null )

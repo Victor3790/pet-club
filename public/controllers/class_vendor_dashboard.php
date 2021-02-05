@@ -6,12 +6,6 @@
 
 require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_dashboard.php';
 
-// SDK de Mercado Pago
-require_once TPC_PLUGIN_PATH .  'vendor/autoload.php';
-
-// Agrega credenciales
-MercadoPago\SDK::setAccessToken(TPC_MP_ACCESS_TOKEN);
-
 if(!class_exists('Tpc_Vendor_Dashboard'))
 {
     class Tpc_Vendor_Dashboard extends Vk_Dashboard
@@ -39,23 +33,6 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
                 exit();
 
             }
-
-            // Crea un objeto de preferencia
-            $preference = new MercadoPago\Preference();
-
-            // Crea un ítem en la preferencia
-            $item = new MercadoPago\Item();
-            $item->title = 'Mi producto';
-            $item->quantity = 1;
-            $item->unit_price = 75.56;
-            //$preference->notification_url = get_rest_url(null, 'tpc/v1/subscription?source_news=webhooks');
-            $preference->back_urls = array( 
-                        'success' => home_url('success'),
-                        'failure' => home_url('failure')
-                    );
-            $preference->external_reference = get_current_user_id();
-            $preference->items = array($item);
-            $preference->save();
 
             $scripts = [
                 '_jquery_ajax',
@@ -87,8 +64,7 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
             $dashboard_template = TPC_PLUGIN_PATH . 'public/views/vendor_dashboard.php';
             $dashboard_view     = $this->vk_load_view(  $dashboard_template, 
                                                         [
-                                                            'user_name'=>$user_name,
-                                                            'preference'=>$preference
+                                                            'user_name'=>$user_name
                                                         ] 
                                                     );
 

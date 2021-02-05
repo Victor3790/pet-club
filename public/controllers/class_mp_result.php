@@ -10,15 +10,18 @@ if(!class_exists('Tpc_MP_Result'))
 {
     class Tpc_MP_Result extends Vk_Dashboard
     {
-        private $plugin_name;
+        //private $plugin_name;
+        private $user_can = 'seller';
 
-        public function __construct($plugin_name_param)
+        /*public function __construct($plugin_name_param)
         {
             $this->plugin_name = $plugin_name_param;
-        }
+        }*/
 
         public function success_page()
         {
+            $this->vk_check_permission($this->user_can);
+
             try {
 
                 $this->get_payment();
@@ -45,6 +48,8 @@ if(!class_exists('Tpc_MP_Result'))
 
         public function failure_page()
         {
+            $this->vk_check_permission($this->user_can);
+
             try {
 
                 $this->check_subscription_status();
@@ -103,8 +108,7 @@ if(!class_exists('Tpc_MP_Result'))
             if( !isset( $payment_body['status'] ) || $payment_body['status'] !== 'approved' )
                 throw new Exception("Payment not approved", 106);
 
-            return;
-                
+            return;       
         }
 
         private function check_subscription_status()
@@ -112,8 +116,8 @@ if(!class_exists('Tpc_MP_Result'))
             $user_id = get_current_user_id();
             $subscription = get_user_meta( $user_id, 'tpc_vendor_subscription', true );
 
-            if( empty( $subscription ) || $subscription['status'] !== 101 )
-                throw new Exception("Not waiting for payment", 104);
+            if( empty( $subscription ) || $subscription['status'] !== 102 )
+                throw new Exception("Not a pending payment", 104);
             
             return;
         }

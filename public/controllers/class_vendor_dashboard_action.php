@@ -172,7 +172,8 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             set_post_thumbnail( $keeper_post_id, $thumbnail_id );
 
             $registered = [
-                'tpc_vendor_registration' => false
+                'tpc_vendor_registration' => true,
+                'tpc_vendor_subscription' => ['status' => 101, 'message' => 'Waiting']
             ];
 
             $result = Vk_User_Meta::register_current_user_meta( $registered );

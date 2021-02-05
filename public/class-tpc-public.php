@@ -71,6 +71,8 @@ class Tpc_Public {
 		
 		require_once TPC_PLUGIN_PATH . 'public/controllers/class_list_widget.php';
 
+		require_once TPC_PLUGIN_PATH . 'public/controllers/class_mp_result.php';
+
     }
 
 	/**
@@ -284,10 +286,13 @@ class Tpc_Public {
 		$vendor_dashboard 	= new Tpc_Vendor_Dashboard($this->plugin_name);
 		$search_dashboard 	= new Tpc_Search_Dashboard($this->plugin_name);
 		$list_widget   		= new Tpc_List_Widget($this->plugin_name);
+		$mp_result 			= new Tpc_MP_Result($this->plugin_name);
 
 		add_shortcode('tpc_vendor_dashboard', array($vendor_dashboard, 'tpc_load_vendor_dashboard'));
 		add_shortcode('tpc_search_dashboard', array($search_dashboard, 'tpc_load_search_dashboard'));
 		add_shortcode('tpc_list_widget',   array($list_widget, 'load_view'));
+		add_shortcode('tpc_mp_success',   array($mp_result, 'success_page'));
+		add_shortcode('tpc_mp_failure',   array($mp_result, 'failure_page'));
 	}
 	
 	/**
@@ -351,6 +356,15 @@ class Tpc_Public {
 			
 			if( ! empty($complete_reg) ){
 				wp_safe_redirect( home_url('/dashboard') );
+				exit();
+			}
+
+		}
+
+		if( is_page( 'success' ) || is_page( 'failure' ) ){
+
+			if( !is_user_logged_in() ) {
+				wp_safe_redirect( home_url() );
 				exit();
 			}
 

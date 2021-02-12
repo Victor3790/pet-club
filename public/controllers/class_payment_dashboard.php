@@ -34,6 +34,12 @@ if(!class_exists('Tpc_Payment_Dashboard'))
 
                 $this->check_subscription_status();
 
+                $registered = [
+                    'tpc_vendor_subscription' => ['status' => 102, 'message' => 'pending']
+                ];
+    
+                $result = Vk_User_Meta::register_current_user_meta( $registered );
+
                 $dashboard_template = TPC_PLUGIN_PATH . 'public/views/mp_payment.php';
 
                 $preference = $this->get_preference();
@@ -59,11 +65,11 @@ if(!class_exists('Tpc_Payment_Dashboard'))
 
         private function check_subscription_status()
         {
-            /*$user_id = get_current_user_id();
+            $user_id = get_current_user_id();
             $subscription = get_user_meta( $user_id, 'tpc_vendor_subscription', true );
 
             if( empty( $subscription ) || $subscription['status'] !== 101 )
-                throw new Exception("Not waiting for payment", 111);*/
+                throw new Exception("Not waiting for payment", 111);
             
             return;
         }
@@ -78,9 +84,15 @@ if(!class_exists('Tpc_Payment_Dashboard'))
             $item->unit_price = 75.56;
             //$preference->notification_url = get_rest_url(null, 'tpc/v1/subscription?source_news=webhooks');
             $preference->back_urls = array( 
-                        'success' => home_url('success'),
-                        'failure' => home_url('failure')
-                    );
+                'success' => home_url('success'),
+                'failure' => home_url('failure')
+            );
+            $preference->payment_methods = array(
+                'excluded_payment_types' => array(
+                    array( 'id' => 'ticket' ),
+                    array( 'id' => 'atm' )
+                )
+            );
             $preference->external_reference = get_current_user_id();
             $preference->items = array($item);
             $preference->save();

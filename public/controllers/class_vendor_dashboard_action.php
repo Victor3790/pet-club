@@ -201,9 +201,9 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $service_name = '';
             $service_id = 0;
 
-            foreach ($services as $key => $value) {
+            foreach ($services as $service) {
 
-                switch ($key) {
+                switch ($service) {
                     case 'tpc_lodging':
                         $service_id = 729;
                         $service_name = 'Alojamiento';

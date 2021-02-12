@@ -176,18 +176,20 @@ class Tpc {
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_custom_query_vars.php';
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_custom_query.php';
 
+		require_once TPC_PLUGIN_PATH . 'public/includes/class_redirect.php';
 		//require_once TPC_PLUGIN_PATH . 'public/includes/class_mercado_pago.php';
 
 		$plugin_public = new Tpc_Public( $this->get_plugin_name(), $this->get_version() );
 		$query_vars = new Custom_Query_Vars();
 		$search = new Custom_Query();
+		$redirect = new Tpc_Redirect();
 		//$mercado_pago = new Tpc_Mercado_Pago();
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_media_uploader' );
-		$this->loader->add_action( 'template_redirect', $plugin_public, 'check_registration' );
+		$this->loader->add_action( 'template_redirect', $redirect, 'check_registration' );
 		$this->loader->add_action( 'elementor/query/tpc_keepers', $search, 'search' );
 		//$this->loader->add_action( 'rest_api_init', $mercado_pago, 'register_route' );
 

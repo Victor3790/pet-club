@@ -26,6 +26,12 @@ if(!class_exists('Tpc_MP_Result'))
 
                 $this->get_payment();
 
+                $registered = [
+                    'tpc_vendor_subscription' => ['status' => 103, 'message' => 'Paid']
+                ];
+    
+                $result = Vk_User_Meta::register_current_user_meta( $registered );
+
                 $dashboard_template = TPC_PLUGIN_PATH . 'public/views/mp_success.php';
 
                 $dashboard_view = $this->vk_load_view( $dashboard_template );
@@ -53,6 +59,12 @@ if(!class_exists('Tpc_MP_Result'))
             try {
 
                 $this->check_subscription_status();
+
+                $registered = [
+                    'tpc_vendor_subscription' => ['status' => 101, 'message' => 'waiting']
+                ];
+    
+                $result = Vk_User_Meta::register_current_user_meta( $registered );
 
                 $dashboard_template = TPC_PLUGIN_PATH . 'public/views/mp_failure.php';
 

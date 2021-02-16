@@ -26,8 +26,19 @@ if(!class_exists('Tpc_MP_Result'))
 
                 $this->get_payment();
 
+                $today_object = new DateTime('now', new DateTimeZone('America/Mazatlan'));
+                $today = $today_object->format('Y-m-d');
+
+                $one_month = new DateInterval('P1M');
+                $today_object->add($one_month);
+                $payment_due = $today_object->format('Y-m-d');
+
                 $registered = [
-                    'tpc_vendor_subscription' => ['status' => 103, 'message' => 'Paid']
+                    'tpc_vendor_subscription' => ['status' => 103, 'message' => 'Paid'],
+                    'tpc_payment_date' => [
+                            'last' => $today, 
+                            'due' => $payment_due,
+                        ]
                 ];
     
                 $result = Vk_User_Meta::register_current_user_meta( $registered );

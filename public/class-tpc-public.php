@@ -319,6 +319,7 @@ class Tpc_Public {
 	public function modify_dokan_dashboard( $urls ) { 
 
 		unset( $urls['products'] );
+		unset( $urls['settings']['sub']['seo'] );
 		return $urls;
 
 	}

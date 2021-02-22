@@ -32,33 +32,33 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                                     'tpc_keeper_address_id', 
                                     $this->user_can);   
 
+            $user_id = get_current_user_id();
+            $keeper_post_id = get_user_meta( $user_id, 'kp_post_id', true );
+
+            if( !empty( $keeper_post_id ) )
+                wp_delete_post( $keeper_post_id, true );
+                
+            $keeper_post = $this->create_keeper_post( $user_id );
+
+            if( $keeper_post === 0 )
+                $this->vk_send_result( $keeper_post );
+
+            $keeper_post_data = [ 'kp_post_id' => $keeper_post ];
+            $result = Vk_User_Meta::register_current_user_meta( $keeper_post_data );
+
             $keeper_address = new vk_form_data\Data( new vk_form_data\input\Input );
             $keeper_address->set_options( $this->input_vars->address, 'post' );
             $keeper_addr_data = $keeper_address->get();
-            $user_info = wp_get_current_user();
             $store_url = dokan_get_store_url( $user_info->ID );
 
-            $postarr = [
-                'post_title'    => $user_info->first_name . ' ' . $user_info->last_name,
-                'post_content'  => '',
-                'post_status'   => 'publish',
-                'post_type'     => 'keeper',
-                'meta_input'    =>  [
-                                        'kp_street' => $keeper_addr_data['tpc_street'],
-                                        'kp_zip'    => $keeper_addr_data['tpc_zip_code'],
-                                        'kp_colony' => $keeper_addr_data['tpc_colony'],
-                                        'kp_store_url' => $store_url
-                                    ]
+            $post_data = [
+                'kp_street' => $keeper_addr_data['tpc_street'],
+                'kp_zip'    => $keeper_addr_data['tpc_zip_code'],
+                'kp_colony' => $keeper_addr_data['tpc_colony'],
+                'kp_store_url' => $store_url
             ];
 
-            $keeper_post = wp_insert_post( $postarr );
-
-            if( $keeper_post == 0 ) {
-                $result = false;
-            } else {
-                $keeper_post_data = [ 'kp_post_id' => $keeper_post ];
-                $result = Vk_User_Meta::register_current_user_meta( $keeper_post_data );
-            }
+            $result = Vk_Post_Meta::register_meta( $keeper_post, $post_data );
 
             $this->vk_send_result( $result );
         }
@@ -264,6 +264,23 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             wp_set_object_terms( $post_id, 'booking', 'product_type' );*/
             //set_post_thumbnail( $post_id,  );
 
+        }
+
+        private function create_keeper_post( $user_id )
+        {
+            $user_info = wp_get_current_user();
+
+            $postarr = [
+                'post_title'    => $user_info->first_name . ' ' . $user_info->last_name,
+                'post_content'  => '',
+                'post_status'   => 'publish',
+                'post_type'     => 'keeper',
+                'post_author'   => $user_id
+            ];
+
+            $keeper_post = wp_insert_post( $postarr );
+
+            return $keeper_post;
         }
     }
 }

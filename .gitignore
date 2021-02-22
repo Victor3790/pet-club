@@ -1,6 +1,3 @@
-*.phar
-*.lock
-vendor/
 .vscode/
 .git/
 includes/vk_forms/

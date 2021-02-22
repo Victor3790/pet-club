@@ -4,7 +4,7 @@
 *
 */
 
-require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_dashboard_action.php';
+require_once TPC_PLUGIN_PATH . 'includes/class_vk_dashboard_action.php';
 require_once TPC_PLUGIN_PATH . 'public/config/class_input_vars.php';
 
 if(!class_exists('Tpc_Vendor_Dashboard_Action'))
@@ -200,22 +200,23 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $user_id = get_current_user_id();
             $service_name = '';
             $service_id = 0;
+            $options = get_option( 'tpc_settings' );
 
             foreach ($services as $service) {
 
                 switch ($service) {
                     case 'tpc_lodging':
-                        $service_id = 729;
+                        $service_id = $options['tpc_lodging_id'];
                         $service_name = 'Alojamiento';
                     break;
 
                     case 'tpc_day_care':
-                        $service_id = 731;
+                        $service_id = $options['tpc_day_care_id'];
                         $service_name = 'Guardería';
                     break;
 
                     case 'tpc_walk':
-                        $service_id = 730;
+                        $service_id = $options['tpc_walk_id'];
                         $service_name = 'Paseo de una hora para perro.';
                     break;
                     

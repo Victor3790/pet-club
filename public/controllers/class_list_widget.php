@@ -4,7 +4,7 @@
 *
 */
 
-require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_dashboard.php';
+require_once TPC_PLUGIN_PATH . 'includes/class_vk_dashboard.php';
 
 if(!class_exists('Tpc_List_Widget'))
 {

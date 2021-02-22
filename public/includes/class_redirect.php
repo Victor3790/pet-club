@@ -36,8 +36,15 @@ if(!class_exists('Tpc_Redirect'))
                 $paid_membership = $this->check_membership( $user_id );
 
                 if( $paid_membership !== true ) {
-                    wp_safe_redirect( home_url('/payment') );
+
+                    $options = get_option( 'tpc_settings' );
+                    $subscription_id = $options['tpc_subscription_id'];
+
+                    WC()->cart->empty_cart();
+                    WC()->cart->add_to_cart( $subscription_id ); 
+                    wp_safe_redirect( wc_get_checkout_url() );
                     exit();
+                    
                 }
 
             }

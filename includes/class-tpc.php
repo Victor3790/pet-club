@@ -156,6 +156,8 @@ class Tpc {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_menu_page' );
 
 	}
 
@@ -169,21 +171,21 @@ class Tpc {
 	private function define_public_hooks() {
 
 		require_once TPC_PLUGIN_PATH . 'includes/vk_forms/Data.php';
-		require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_html.php';
-		require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_user_meta.php';
-		require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_post_meta.php';
+		require_once TPC_PLUGIN_PATH . 'includes/class_vk_html.php';
+		require_once TPC_PLUGIN_PATH . 'includes/class_vk_user_meta.php';
+		require_once TPC_PLUGIN_PATH . 'includes/class_vk_post_meta.php';
 
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_custom_query_vars.php';
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_custom_query.php';
 
 		require_once TPC_PLUGIN_PATH . 'public/includes/class_redirect.php';
-		//require_once TPC_PLUGIN_PATH . 'public/includes/class_mercado_pago.php';
+		require_once TPC_PLUGIN_PATH . 'public/includes/class_payment.php';
 
 		$plugin_public = new Tpc_Public( $this->get_plugin_name(), $this->get_version() );
 		$query_vars = new Custom_Query_Vars();
 		$search = new Custom_Query();
 		$redirect = new Tpc_Redirect();
-		//$mercado_pago = new Tpc_Mercado_Pago();
+		$payment = new Tpc_Payment();
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -191,7 +193,7 @@ class Tpc {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_media_uploader' );
 		$this->loader->add_action( 'template_redirect', $redirect, 'check_registration' );
 		$this->loader->add_action( 'elementor/query/tpc_keepers', $search, 'search' );
-		//$this->loader->add_action( 'rest_api_init', $mercado_pago, 'register_route' );
+		$this->loader->add_action( 'woocommerce_payment_complete', $payment, 'register_payment' );
 
 		$this->loader->add_filter( 'dokan_get_dashboard_nav', $plugin_public, 'modify_dokan_dashboard' );
 		$this->loader->add_filter( 'query_vars', $query_vars, 'set_vars' );

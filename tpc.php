@@ -43,11 +43,6 @@ define( 'TPC_VERSION', '1.0.0' );
 define( 'TPC_PLUGIN_PATH', plugin_dir_path(__FILE__) );
 
 /**
- * Mercado pago access token
- */
-define( 'TPC_MP_ACCESS_TOKEN', 'TEST-5405902477656417-122921-dba0b225aeb1405f5d82a2c5fe872098-172563922' );
-
-/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-tpc-activator.php
  */

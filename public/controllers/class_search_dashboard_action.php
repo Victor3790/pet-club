@@ -4,7 +4,7 @@
 *
 */
 
-require_once TPC_PLUGIN_PATH . 'public/includes/class_vk_dashboard_action.php';
+require_once TPC_PLUGIN_PATH . 'includes/class_vk_dashboard_action.php';
 
 if(!class_exists('Tpc_Search_Dashboard_Action'))
 {

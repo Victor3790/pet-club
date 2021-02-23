@@ -4,7 +4,8 @@ if(!class_exists('Tpc_Redirect'))
 {
     class Tpc_Redirect
     {
-        public function check_registration() { 
+        public function check_registration() 
+        { 
 
             $user_id = get_current_user_id();
 
@@ -19,18 +20,14 @@ if(!class_exists('Tpc_Redirect'))
                     exit();
                 }
 
-                $payment_due_date = new DateTime(
-                    $this->get_payment_due_date( $user_id ), 
-                    new DateTimeZone('America/Mazatlan')
-                );
-                $today = new DateTime('now', new DateTimeZone('America/Mazatlan'));
+                $monthly_membership_paid = $this->is_membership_paid( $user_id );
 
-                if( $payment_due_date < $today ) {
-                    $registered = [
+                if( !$monthly_membership_paid ) {
+                    $payment_status = [
                         'tpc_vendor_subscription' => ['status' => 101, 'message' => 'Pending'],
                     ];
         
-                    Vk_User_Meta::register_current_user_meta( $registered );
+                    Vk_User_Meta::register_current_user_meta( $payment_status );
                 }
 
                 $paid_membership = $this->check_membership( $user_id );
@@ -62,27 +59,6 @@ if(!class_exists('Tpc_Redirect'))
     
             }
     
-            if( is_page( 'success' ) || is_page( 'failure' ) ) {
-    
-                $this->check_login();
-
-            }
-
-            if( is_page( 'payment' ) ) {
-
-                $subscription_status = get_user_meta( $user_id, 'tpc_vendor_subscription', true );
-
-                if( (int)$subscription_status['status'] === 102 ) {
-
-                    $registered = [
-                        'tpc_vendor_subscription' => ['status' => 101, 'message' => 'Pending']
-                    ];
-        
-                    $result = Vk_User_Meta::register_current_user_meta( $registered );
-                }
-
-            }
-    
             return;
     
         }
@@ -112,11 +88,23 @@ if(!class_exists('Tpc_Redirect'))
                 return false;
         }
 
-        private function get_payment_due_date( $user_id )
+        private function is_membership_paid( $user_id )
         {
             $payment_date = get_user_meta( $user_id, 'tpc_payment_date', true );
 
-            return $payment_date['due'];
+            if( empty( $payment_date ) )
+                return false;
+
+            $payment_due_date = new DateTime(
+                $payment_date['due'], 
+                new DateTimeZone('America/Mazatlan')
+            );
+            $today = new DateTime('now', new DateTimeZone('America/Mazatlan'));
+
+            if( $payment_due_date < $today ) 
+                return false;
+
+            return true;
         }
     }
 }

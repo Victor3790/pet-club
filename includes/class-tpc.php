@@ -194,6 +194,7 @@ class Tpc {
 		$this->loader->add_action( 'template_redirect', $redirect, 'check_registration' );
 		$this->loader->add_action( 'elementor/query/tpc_keepers', $search, 'search' );
 		$this->loader->add_action( 'woocommerce_payment_complete', $payment, 'register_payment' );
+		$this->loader->add_action( 'woocommerce_thankyou', $payment, 'change_thank_you' );
 
 		$this->loader->add_filter( 'dokan_get_dashboard_nav', $plugin_public, 'modify_dokan_dashboard' );
 		$this->loader->add_filter( 'query_vars', $query_vars, 'set_vars' );

@@ -49,7 +49,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $keeper_address = new vk_form_data\Data( new vk_form_data\input\Input );
             $keeper_address->set_options( $this->input_vars->address, 'post' );
             $keeper_addr_data = $keeper_address->get();
-            $store_url = dokan_get_store_url( $user_info->ID );
+            $store_url = dokan_get_store_url( $user_id );
 
             $post_data = [
                 'kp_street' => $keeper_addr_data['tpc_street'],
@@ -201,6 +201,8 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $service_name = '';
             $service_id = 0;
             $options = get_option( 'tpc_settings' );
+            $user = get_userdata( $user_id );
+            $user_name = $user->data->display_name;
 
             foreach ($services as $service) {
 
@@ -217,7 +219,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
                     case 'tpc_walk':
                         $service_id = $options['tpc_walk_id'];
-                        $service_name = 'Paseo de una hora para perro.';
+                        $service_name = 'Paseo para perro.';
                     break;
                     
                     default:
@@ -232,14 +234,15 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
                 $post_id = $product->get_id();
 
-                $product_name = [
+                $product_data = [
                     'ID' => $post_id,
-                    'post_title' => $user_id . ' ' . $service_name,
-                    'post_name' => $service_name . '-' . $user_id,
-                    'post_status' => 'publish'
+                    'post_title' => $service_name . '-' . $user_name,
+                    'post_name' =>  $service_name . '-' . $user_name,
+                    'post_status' => 'publish',
+                    'post_author' => $user_id
                 ];
 
-                wp_update_post( $product_name );
+                wp_update_post( $product_data );
             }
 
             return;

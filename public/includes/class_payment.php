@@ -4,22 +4,13 @@ if(!class_exists('Tpc_Payment'))
 {
     class Tpc_Payment
     {
-       function register_payment( $order_id )
+       function change_order_status( $order_id )
        {
             if( !$this->is_subscription( $order_id ) )
                 return;
 
-            $today = new DateTime('now', new DateTimeZone('America/Mazatlan'));
-            $payment_date = $today->format('Y-m-d');
-            $month_period = new DateInterval('P1M');
-            $due_date = $today->add( $month_period )->format('Y-m-d');
-
-            $payment_info = [
-                'tpc_vendor_subscription' => ['status' => 103, 'message' => 'Paid'],
-                'tpc_payment_date' => ['last' => $payment_date, 'due' => $due_date]
-            ];
-    
-            Vk_User_Meta::register_current_user_meta( $payment_info );
+            $order = new WC_Order( $order_id );
+            $order->update_status( 'completed' );
        }
 
        function change_thank_you()
@@ -28,6 +19,8 @@ if(!class_exists('Tpc_Payment'))
 
             if( !$this->is_subscription( $order_id ) )
                 return;
+
+            $this->register_payment( $order_id );
 
             echo (  '<a href="' . 
                     home_url('dashboard') . 
@@ -56,6 +49,21 @@ if(!class_exists('Tpc_Payment'))
                 return false;
 
             return true;
+       }
+
+       private function register_payment( $order_id )
+       {
+            $today = new DateTime('now', new DateTimeZone('America/Mazatlan'));
+            $payment_date = $today->format('Y-m-d');
+            $month_period = new DateInterval('P1M');
+            $due_date = $today->add( $month_period )->format('Y-m-d');
+
+            $payment_info = [
+                'tpc_vendor_subscription' => ['status' => 103, 'message' => 'Paid', 'order_id'=>$order_id],
+                'tpc_payment_date' => ['last' => $payment_date, 'due' => $due_date]
+            ];
+    
+            Vk_User_Meta::register_current_user_meta( $payment_info );
        }
     }
 }

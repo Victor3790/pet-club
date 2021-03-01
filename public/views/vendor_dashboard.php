@@ -342,7 +342,7 @@ if(empty($user_name))
          <h5>Pago de membresía</h5>
          <p>
             La membresía de The Pet Club tiene un costo de $--- pesos, la puedes pagar desde 
-            Mercado Pago <a  href="<?php echo home_url( 'payment' ); ?>">Haciendo click aquí.</a>
+            Mercado Pago <a  href="<?php echo home_url( 'dashboard' ); ?>">Haciendo click aquí.</a>
          </p>
        </div>
     </div>

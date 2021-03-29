@@ -316,4 +316,42 @@ class Tpc_Public {
 		return $urls;
 
 	}
+
+	/**
+	 * Add Dokan dashboard view.
+	 *
+	 * @since    1.0.0
+	 */
+
+	public function dokan_load_document_menu( $query_vars ) 
+	{ 
+
+		$query_vars['tpc_keeper_view'] = 'tpc_keeper_view';
+		return $query_vars;
+
+	}
+
+	public function dokan_add_custom_menu( $urls ) 
+	{ 
+
+		$urls['tpc_keeper_view'] = array(
+			'title'	=> __( 'Tu información', 'tpc' ),
+			'icon'	=> '<i class="fa fa-user"></i>',
+			'url'	=> dokan_get_navigation_url( 'tpc_keeper_view' ),
+			'pos'	=> 10
+		);
+		return $urls;
+
+	}
+
+	public function dokan_load_template( $query_vars )
+	{
+
+		if( isset( $query_vars['tpc_keeper_view'] ) ) {
+
+			require_once TPC_PLUGIN_PATH . 'public/views/keeper_info.php';
+
+		}
+
+	}
 }

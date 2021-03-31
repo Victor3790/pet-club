@@ -196,9 +196,9 @@ class Tpc {
 		$this->loader->add_action( 'woocommerce_order_status_processing', $payment, 'change_order_status' );
 		$this->loader->add_action( 'woocommerce_order_status_on-hold', $payment, 'change_order_status' );
 		$this->loader->add_action( 'woocommerce_thankyou', $payment, 'change_thank_you' );
-		$this->loader->add_action( 'dokan_load_custom_template', $plugin_public, 'dokan_load_template' );
+		$this->loader->add_action( 'dokan_load_custom_template', $plugin_public, 'dokan_load_template');
 
-		$this->loader->add_filter( 'dokan_get_dashboard_nav', $plugin_public, 'modify_dokan_dashboard' );
+		$this->loader->add_filter( 'dokan_get_dashboard_nav', $plugin_public, 'modify_dokan_dashboard', 12, 1 );
 		$this->loader->add_filter( 'query_vars', $query_vars, 'set_vars' );
 
 		$this->loader->add_filter( 'dokan_query_var_filter', $plugin_public, 'dokan_load_document_menu' );

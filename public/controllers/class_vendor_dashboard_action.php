@@ -230,7 +230,9 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                     break;
                 }
 
-                $product = WC_Admin_Duplicate_Product::product_duplicate( wc_get_product( $service_id ) );
+                $wc_admin   = new WC_Admin_Duplicate_Product();
+                $service    = wc_get_product( $service_id );
+                $product    = $wc_admin->product_duplicate( $service );
 
                 $post_id = $product->get_id();
 

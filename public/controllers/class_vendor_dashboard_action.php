@@ -234,40 +234,13 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 $service    = wc_get_product( $service_id );
                 $product    = $wc_admin->product_duplicate( $service );
 
+                $product->set_name( $service_name . '-' . $user_name );
+                $product->set_status( 'publish' );
+                $product->save();
+
                 $post_id = $product->get_id();
-
-                $product_data = [
-                    'ID' => $post_id,
-                    'post_title' => $service_name . '-' . $user_name,
-                    'post_name' =>  $service_name . '-' . $user_name,
-                    'post_status' => 'publish',
-                    'post_author' => $user_id
-                ];
-
-                wp_update_post( $product_data );
+                update_post_meta( $post_id, '_wc_booking_qty', 100 );
             }
-
-            return;
-
-            /*$post_id = wp_insert_post( array(
-                'post_title' => 'Bartosz\'s product',
-                'post_content' => 'Product for Bartosz and Torvi.',
-                'post_status' => 'publish',
-                'post_type' => 'product',
-                'meta_input' => array( 
-                                        '_price' => '180',
-                                        '_virtual' => 'yes',
-                                        '_downloadable' => 'no',
-                                        '_wc_booking_duration_unit' => 'hour',
-                                        '_wc_booking_duration' => '1',
-                                        '_wc_booking_block_cost' => '180',
-                                        '_wc_booking_max_duration' => '2',
-                                    )
-                ) 
-            );
-
-            wp_set_object_terms( $post_id, 'booking', 'product_type' );*/
-            //set_post_thumbnail( $post_id,  );
 
         }
 

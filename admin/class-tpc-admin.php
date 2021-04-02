@@ -237,4 +237,24 @@ class Tpc_Admin {
 			echo '<input type="number" name="tpc_settings[tpc_subscription_id]" value="' . $options['tpc_subscription_id'] . '">';
 	}
 
+	public function enable_keeper( $user_id )
+	{
+		$kp_post_id = get_user_meta( $user_id, 'kp_post_id', true );
+
+		$this->update_keeper( $kp_post_id, 'publish' );
+	}
+
+	public function disable_keeper( $user_id )
+	{
+		$kp_post_id = get_user_meta( $user_id, 'kp_post_id', true );
+
+		$this->update_keeper( $kp_post_id, 'pending' );
+	}
+
+	private function update_keeper( $post_id, $status )
+	{
+		$post = array( 'ID' => $post_id, 'post_status' => $status );
+		wp_update_post($post);
+	}
+
 }

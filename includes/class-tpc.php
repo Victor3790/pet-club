@@ -159,6 +159,10 @@ class Tpc {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_menu_page' );
 
+		//$this->loader->add_action( 'update_user_meta', $plugin_admin, 'check_user_meta', 10, 4 );
+		$this->loader->add_action( 'dokan_vendor_enabled', $plugin_admin, 'enable_keeper' );
+		$this->loader->add_action( 'dokan_vendor_disabled', $plugin_admin, 'disable_keeper' );
+
 	}
 
 	/**

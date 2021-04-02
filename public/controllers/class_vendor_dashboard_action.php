@@ -235,7 +235,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 $product    = $wc_admin->product_duplicate( $service );
 
                 $product->set_name( $service_name . '-' . $user_name );
-                $product->set_status( 'publish' );
+                $product->set_status( 'pending' );
                 $product->save();
 
                 $post_id = $product->get_id();
@@ -251,7 +251,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $postarr = [
                 'post_title'    => $user_info->first_name . ' ' . $user_info->last_name,
                 'post_content'  => '',
-                'post_status'   => 'publish',
+                'post_status'   => 'pending',
                 'post_type'     => 'keeper',
                 'post_author'   => $user_id
             ];

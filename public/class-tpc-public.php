@@ -129,6 +129,12 @@ class Tpc_Public {
 			$this->version, 
 			'all' );
 
+		wp_register_style( $this->plugin_name . '_select2_styles', 
+			plugin_dir_url( __FILE__ ) . 'assets/css/select2.min.css', 
+			array($this->plugin_name . '_bootstrap_styles'), 
+			$this->version, 
+			'all' );
+
 	}
 
 	/**
@@ -267,6 +273,12 @@ class Tpc_Public {
 
 		wp_register_script( $this->plugin_name . '_tpc_search_controls', 
 			plugin_dir_url( __FILE__ ) . 'assets/js/tpc_search_controls.js', 
+			array('jquery'), 
+			$this->version, 
+			false );
+
+		wp_register_script( $this->plugin_name . '_select2', 
+			plugin_dir_url( __FILE__ ) . 'assets/js/select2.full.min.js', 
 			array('jquery'), 
 			$this->version, 
 			false );

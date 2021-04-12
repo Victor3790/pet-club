@@ -50,7 +50,8 @@ if(empty($user_name))
                   <label class="tpc-form__label" for="tpc_zip_code">Código postal</label>
                   <input class="tpc-form__input" type="text" name="tpc_zip_code">
                   <label class="tpc-form__label" for="tpc_colony">Colonia</label>
-                  <input id="region_1" class="tpc-form__input" type="text" name="tpc_colony">
+                  <select class="tpc_ajax_select" name="tpc_colony"></select>
+                  <!--<input id="region_1" class="tpc-form__input" type="text" name="tpc_colony">-->
                   <?php wp_nonce_field( 'register_keeper_address', 'tpc_keeper_address_id', false ); ?>
                   <input type="hidden" name="action" value="tpc_register_keeper_address">
                   <input class="tpc-form__button" type="submit" value="Guardar">

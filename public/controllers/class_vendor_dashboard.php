@@ -63,10 +63,13 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
             $user_obj = get_userdata( $this->current_user_id );
             $user_name = $user_obj->first_name . ' ' . $user_obj->last_name;
 
+            $colonias = include TPC_PLUGIN_PATH . 'public/config/colonias.php';
+
             $dashboard_template = TPC_PLUGIN_PATH . 'public/views/vendor_dashboard.php';
             $dashboard_view     = $this->vk_load_view(  $dashboard_template, 
                                                         [
-                                                            'user_name'=>$user_name
+                                                            'user_name'=>$user_name,
+                                                            'colonias'=>$colonias
                                                         ] 
                                                     );
 

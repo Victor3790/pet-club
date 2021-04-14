@@ -29,7 +29,8 @@ if(!class_exists('Tpc_Search_Dashboard'))
             $scripts = [
                 /*'_google_maps',
                 '_tpc_map',*/
-                '_tpc_search_controls'
+                '_tpc_search_controls',
+                '_select2'
             ];
 
             $styles = [
@@ -37,17 +38,17 @@ if(!class_exists('Tpc_Search_Dashboard'))
                 '_fontawesome',
                 '_fontawesome_solid',
                 '_form_styles',
-                '_search'
+                '_search',
+                '_select2_styles'
             ];
 
             $this->vk_enqueue_styles( $this->plugin_name, $styles );
             $this->vk_enqueue_scripts( $this->plugin_name, $scripts );
 
-            //$user_obj = get_userdata( $this->current_user_id );
-            //$user_name = $user_obj->first_name . ' ' . $user_obj->last_name;
+            $colonias = include TPC_PLUGIN_PATH . 'public/config/colonias.php';
 
             $dashboard_template = TPC_PLUGIN_PATH . 'public/views/search_dashboard.php';
-            $dashboard_view     = $this->vk_load_view( $dashboard_template/*, ['user_name'=>$user_name]*/ );
+            $dashboard_view     = $this->vk_load_view( $dashboard_template, ['colonias'=>$colonias] );
 
             return $dashboard_view;
         }

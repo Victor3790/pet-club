@@ -1,12 +1,9 @@
 jQuery(document).ready(function ($) {
 
-    /*let input = document.getElementById('region_1');
-    let options = {
-        types: ['(regions)'],
-        componentRestrictions: {country: 'mx'}
-    };
-
-    const autocomplete = new google.maps.places.Autocomplete(input, options);*/
+    $('#tpc_select_1').select2({
+        placeholder: 'Selecciona un minicipio',
+        language: 'es'
+    });
 
     $('#tpc_keeper_address_form').validate({
         rules: {
@@ -20,8 +17,7 @@ jQuery(document).ready(function ($) {
                 digits: true
             },
             tpc_colony: {
-                required: true,
-                rangelength: [8,150]
+                required: true
             },
         },
         messages: {
@@ -39,10 +35,7 @@ jQuery(document).ready(function ($) {
                 digits: 'El código postal no puede tener letras.'
             },
             tpc_colony: {
-                required: 'Por favor ingresa tu colonia.',
-                rangelength: jQuery
-                            .validator
-                            .format("La colonia debe tener entre {0} y {1} caracteres. &nbsp;")
+                required: 'Por favor ingresa tu colonia.'
             },
         },
         submitHandler: function (form) {

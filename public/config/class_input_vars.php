@@ -3,25 +3,29 @@ if(!class_exists('Tpc_Input_Vars'))
 {
     class Tpc_Input_Vars
     {
-
         public $address = [
-            [
+            'street' => [
                 'input_name' => 'tpc_street',
                 'type' => 'string', 
                 'validation' => [ 10, 70 ],
                 'sanitize' => true
             ],
-            [
+            'code' => [
                 'input_name' => 'tpc_zip_code', 
                 'type' => 'digit', 
                 'validation' => [ 5 ],
                 'sanitize' => true
             ],
-            [
+            /*[
                 'input_name' => 'tpc_colony', 
                 'type' => 'string', 
                 'validation' => [ 10, 150 ],
                 'sanitize' => true
+            ]*/
+            'colony' => [
+                'input_name' => 'tpc_colony', 
+                'type' => 'string', 
+                //'validation' => [ 10, 150 ]
             ]
         ];
 
@@ -161,6 +165,12 @@ if(!class_exists('Tpc_Input_Vars'))
                 'validation' => [ 0, 1000000 ]
             ]
         ];
+
+        function __construct()
+        {
+            $colonias = include TPC_PLUGIN_PATH . 'public/config/colonias.php';
+            $this->address['colony']['validation'] = $colonias;
+        }
 
     }
 }

@@ -1,4 +1,9 @@
 jQuery(document).ready(function ($) {
+
+    $('#tpc_select_1').select2({
+        placeholder: 'Selecciona un minicipio',
+        language: 'es'
+    });
         
     $('.search__item__service').click( function() {
 

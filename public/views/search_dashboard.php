@@ -47,7 +47,15 @@
                         <input id="service" name="tpc_service" type="hidden">
                         <input id="dog_input" name="tpc_dog" type="hidden" value=0>
                         <input id="cat_input" name="tpc_cat" type="hidden" value=0>
-                        <input id="region" name="tpc_region" type="text">
+                        <!--<input id="region" name="tpc_region" type="text">-->
+                        <select id="tpc_select_1" class="tpc-form__input" name="tpc_colony">
+                            <option selected="true" disabled="disabled">
+                                Seleccione
+                            </option>
+                            <?php foreach( $colonias as $colonia ) : ?>
+                                <option value="<?php echo $colonia; ?>"><?php echo $colonia; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <input class="tpc-form__button" type="submit" value="Buscar">
                     </div>
                 </form> 

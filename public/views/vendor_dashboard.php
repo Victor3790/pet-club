@@ -296,11 +296,15 @@ if(empty($user_name))
                      <legend>Selecciona las máscotas que atenderás.</legend>
                      <div class="tpc_pet_client_error"></div>
                      <div class="form-check">
-                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_dog">
+                        <input id="dog_checkbox" class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_dog">
                         <label class="form-check-label" for="tpc_pet_client[]">
                            Perro
                         </label>
                      </div>
+                     <fieldset id="tpc_dog_weight_controls" class="form-group" style="display:none;">
+                        <label class="tpc-form__label" for="tpc_dog_weight">Peso</label>
+                        <input class="tpc-form__input" type="number" name="tpc_dog_weight" style="width:100px;">
+                     </fieldset>
                      <div class="form-check">
                         <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_cat">
                         <label class="form-check-label" for="tpc_pet_client[]">
@@ -312,23 +316,35 @@ if(empty($user_name))
                      <legend>Selecciona los servicios que ofrecerás</legend>
                      <div class="tpc_service_error"></div>
                      <div class="form-check">
-                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_lodging">
+                        <input id="tpc_lodging_select" class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_lodging">
                         <label class="form-check-label" for="tpc_service[]">
-                           Hospedaje ($200.00)
+                           Hospedaje
                         </label>
                      </div>
+                     <fieldset id="tpc_lodging_qty" class="form-group tpc-form__inner-fieldset" style="display:none;">
+                        <label class="tpc-form__inner-label" for="tpc_lodging_qty">¿A cuántas mascotas puedes dar este servicio a la vez?</label>
+                        <input class="tpc-form__input" type="number" name="tpc_lodging_qty" style="width:100px;" value=0>
+                     </fieldset>
                      <div class="form-check">
-                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_day_care">
+                        <input id="tpc_day_care_select" class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_day_care">
                         <label class="form-check-label" for="tpc_service[]">
-                           Guardería ($180.00)
+                           Guardería
                         </label>
                      </div>
+                     <fieldset id="tpc_day_care_qty" class="form-group tpc-form__inner-fieldset" style="display:none;">
+                        <label class="tpc-form__inner-label" for="tpc_day_care_qty">¿A cuántas mascotas puedes dar este servicio a la vez?</label>
+                        <input class="tpc-form__input" type="number" name="tpc_day_care_qty" style="width:100px;" value=0>
+                     </fieldset>
                      <div class="form-check">
-                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_walk">
+                        <input id="tpc_walk_select" class="form-check-input tpc-form__radio" type="checkbox" name="tpc_service[]" value="tpc_walk">
                         <label class="form-check-label" for="tpc_service[]">
-                           Paseo x hora ($180.00)
+                           Paseo x hora
                         </label>
                      </div>
+                     <fieldset id="tpc_walk_qty" class="form-group tpc-form__inner-fieldset" style="display:none;">
+                        <label class="tpc-form__inner-label" for="tpc_walk_qty">¿A cuántas mascotas puedes dar este servicio a la vez?</label>
+                        <input class="tpc-form__input" type="number" name="tpc_walk_qty" style="width:100px;" value=0>
+                     </fieldset>
                   </fieldset>
                   <fieldset class="form-group">
                      <legend>Cuentanos un poco más de ti y tus servicios. (Entre 10 y 250 caracteres)</legend>

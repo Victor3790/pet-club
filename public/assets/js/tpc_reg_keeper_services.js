@@ -1,5 +1,21 @@
 jQuery(document).ready(function ($) {
 
+    $('#dog_checkbox').change(function(){
+        $('#tpc_dog_weight_controls').toggle();
+    });
+
+    $('#tpc_lodging_select').change(function(){
+        $('#tpc_lodging_qty').toggle();
+    });
+
+    $('#tpc_day_care_select').change(function(){
+        $('#tpc_day_care_qty').toggle();
+    });
+
+    $('#tpc_walk_select').change(function(){
+        $('#tpc_walk_qty').toggle();
+    });
+
     $('#tpc_keeper_services').validate({
         ignore: [],
         rules: {

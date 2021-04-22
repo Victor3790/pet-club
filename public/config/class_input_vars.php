@@ -16,16 +16,9 @@ if(!class_exists('Tpc_Input_Vars'))
                 'validation' => [ 5 ],
                 'sanitize' => true
             ],
-            /*[
-                'input_name' => 'tpc_colony', 
-                'type' => 'string', 
-                'validation' => [ 10, 150 ],
-                'sanitize' => true
-            ]*/
             'colony' => [
                 'input_name' => 'tpc_colony', 
-                'type' => 'string', 
-                //'validation' => [ 10, 150 ]
+                'type' => 'string'
             ]
         ];
 
@@ -152,6 +145,21 @@ if(!class_exists('Tpc_Input_Vars'))
                     'tpc_day_care',
                     'tpc_walk'
                 ]
+            ],
+            [
+                'input_name' => 'tpc_lodging_qty',
+                'type' => 'numeric',
+                'validation' => [ 0, 10 ]
+            ],
+            [
+                'input_name' => 'tpc_day_care_qty',
+                'type' => 'numeric',
+                'validation' => [ 0, 10 ]
+            ],
+            [
+                'input_name' => 'tpc_walk_qty',
+                'type' => 'numeric',
+                'validation' => [ 0, 10 ]
             ],
             [
                 'input_name' => 'tpc_description',

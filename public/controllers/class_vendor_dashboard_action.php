@@ -146,7 +146,13 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $services = $keeper_services_data['tpc_service'];
 
-            $this->create_products( $services );
+            $availability = $this->get_service_availability( $keeper_services_data );
+
+            $service_ids = $this->create_products( $services, $availability );
+
+            $reg_service_ids = array( 'kp_service_ids' => $service_ids );
+
+            Vk_User_Meta::register_current_user_meta( $reg_service_ids );
 
             $this->register_split_data( $keeper_post_id, $services );
 
@@ -181,6 +187,19 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $this->vk_send_result( $result );
         }
 
+        private function get_service_availability( $service_data )
+        {
+            
+            $availabilities = array();
+
+            $availabilities['tpc_lodging_qty'] = ( $service_data['tpc_lodging_qty'] != 0 ) ? $service_data['tpc_lodging_qty'] : 1;
+            $availabilities['tpc_day_care_qty'] = ( $service_data['tpc_day_care_qty'] != 0 ) ? $service_data['tpc_day_care_qty'] : 1;
+            $availabilities['tpc_walk_qty'] = ( $service_data['tpc_walk_qty'] != 0 ) ? $service_data['tpc_walk_qty'] : 1;
+
+            return $availabilities;
+
+        }
+
         private function register_split_data( $post_id, $data )
         {
             $post_keys = str_replace( 'tpc', 'kp', $data ); 
@@ -195,7 +214,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             Vk_Post_Meta::register_meta( $post_id, $post_data );
         }
 
-        private function create_products( $services )
+        private function create_products( $services, $availabilities )
         {
             $user_id = get_current_user_id();
             $service_name = '';
@@ -203,6 +222,7 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
             $options = get_option( 'tpc_settings' );
             $user = get_userdata( $user_id );
             $user_name = $user->data->display_name;
+            $service_ids = array();
 
             foreach ($services as $service) {
 
@@ -210,16 +230,19 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                     case 'tpc_lodging':
                         $service_id = $options['tpc_lodging_id'];
                         $service_name = 'Alojamiento';
+                        $availability = $availabilities['tpc_lodging_qty'];
                     break;
 
                     case 'tpc_day_care':
                         $service_id = $options['tpc_day_care_id'];
                         $service_name = 'Guardería';
+                        $availability = $availabilities['tpc_day_care_qty'];
                     break;
 
                     case 'tpc_walk':
                         $service_id = $options['tpc_walk_id'];
                         $service_name = 'Paseo para perro.';
+                        $availability = $availabilities['tpc_walk_qty'];
                     break;
                     
                     default:
@@ -239,8 +262,12 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 $product->save();
 
                 $post_id = $product->get_id();
-                update_post_meta( $post_id, '_wc_booking_qty', 100 );
+                update_post_meta( $post_id, '_wc_booking_qty', $availability );
+                array_push( $service_ids, $post_id );
+
             }
+
+            return $service_ids;
 
         }
 

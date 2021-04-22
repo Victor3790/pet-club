@@ -16,9 +16,19 @@
     font-size: 16px;
 }
 
+.tpc-form__inner-fieldset
+{
+    margin-left: 37px;
+}
+
 .tpc-form__label
 {
     margin-top: 35px!important;
+}
+
+.tpc-form__inner-label
+{
+    margin-top: 10px!important;
 }
 
 .tpc-form__radio {

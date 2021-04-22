@@ -18,7 +18,7 @@ jQuery(document).ready(function ($) {
             enableAnchorOnDoneStep: true 
         },
         keyboardSettings: {
-            keyNavigation: false
+            keyNavigation: true
         },
     });
 

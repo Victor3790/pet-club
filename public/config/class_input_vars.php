@@ -138,6 +138,16 @@ if(!class_exists('Tpc_Input_Vars'))
                 ]
             ],
             [
+                'input_name' => 'tpc_pet_size',
+                'type' => 'array',
+                'validation' => [
+                    'tpc_small',
+                    'tpc_medium_sized',
+                    'tpc_big',
+                    'tpc_extra_big'
+                ]
+            ],
+            [
                 'input_name' => 'tpc_service',
                 'type' => 'array',
                 'validation' => [

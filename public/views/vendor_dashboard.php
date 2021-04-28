@@ -39,7 +39,7 @@ if(empty($user_name))
        </li>
     </ul>
  
-    <div class="tab-content">
+    <div class="tab-content" style="overflow:scroll;">
       <div id="step-1" class="tab-pane" role="tabpanel">
             <h5>Tu dirección</h5>
             <p>Requerimos tu dirección para poder conectarte con clientes cerca de ti.</p>
@@ -296,19 +296,43 @@ if(empty($user_name))
                      <legend>Selecciona las máscotas que atenderás.</legend>
                      <div class="tpc_pet_client_error"></div>
                      <div class="form-check">
-                        <input id="dog_checkbox" class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_dog">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_dog">
                         <label class="form-check-label" for="tpc_pet_client[]">
                            Perro
                         </label>
                      </div>
-                     <fieldset id="tpc_dog_weight_controls" class="form-group" style="display:none;">
-                        <label class="tpc-form__label" for="tpc_dog_weight">Peso</label>
-                        <input class="tpc-form__input" type="number" name="tpc_dog_weight" style="width:100px;">
-                     </fieldset>
                      <div class="form-check">
                         <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_cat">
                         <label class="form-check-label" for="tpc_pet_client[]">
                            Gato
+                        </label>
+                     </div>
+                  </fieldset>
+                  <fieldset id="tpc_dog_weight_controls" class="form-group">
+                     <legend>Tamaño de las mascotas.</legend>
+                     <div class="tpc_pet_size_error"></div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_size[]" value="tpc_small">
+                        <label class="form-check-label" for="tpc_pet_size[]">
+                           Chicas < 10kg.
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_size[]" value="tpc_medium_sized">
+                        <label class="form-check-label" for="tpc_pet_size[]">
+                           Medianas 11 - 20kg.
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_size[]" value="tpc_big">
+                        <label class="form-check-label" for="tpc_pet_size[]">
+                           Grandes 21 - 40kg.
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_size[]" value="tpc_extra_big">
+                        <label class="form-check-label" for="tpc_pet_size[]">
+                           Extra grandes + 40kg.
                         </label>
                      </div>
                   </fieldset>

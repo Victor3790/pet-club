@@ -160,6 +160,10 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
 
             $this->register_split_data( $keeper_post_id, $pets );
 
+            $sizes = $keeper_services_data['tpc_pet_size'];
+
+            $this->register_split_data( $keeper_post_id, $sizes );
+
             $post_data = [
                 'kp_experience'     => $keeper_services_data['tpc_experience'],
                 'kp_abilities'      => $keeper_services_data['tpc_abilities']

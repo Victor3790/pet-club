@@ -1,9 +1,5 @@
 jQuery(document).ready(function ($) {
 
-    $('#dog_checkbox').change(function(){
-        $('#tpc_dog_weight_controls').toggle();
-    });
-
     $('#tpc_lodging_select').change(function(){
         $('#tpc_lodging_qty').toggle();
     });
@@ -27,6 +23,9 @@ jQuery(document).ready(function ($) {
                 required: true
             },
             'tpc_pet_client[]' : {
+                required: true
+            },
+            'tpc_pet_size[]' : {
                 required: true
             },
             'tpc_service[]' : {
@@ -53,6 +52,9 @@ jQuery(document).ready(function ($) {
             'tpc_pet_client[]' : {
                 required: 'Selecciona las mascotas que atenderás'
             },
+            'tpc_pet_size[]' : {
+                required: 'Selecciona al menos un tamaño'
+            },
             'tpc_service[]' : {
                 required: 'Selecciona uno o varios servicios.'
             },
@@ -72,6 +74,9 @@ jQuery(document).ready(function ($) {
             }
             else if( element.attr( 'name' ) === 'tpc_pet_client[]' ) {
                 error.appendTo( '.tpc_pet_client_error' );
+            }
+            else if( element.attr( 'name' ) === 'tpc_pet_size[]' ) {
+                error.appendTo( '.tpc_pet_size_error' );
             }
             else if( element.attr( 'name' ) === 'tpc_service[]' ) {
                 error.appendTo( '.tpc_service_error' );

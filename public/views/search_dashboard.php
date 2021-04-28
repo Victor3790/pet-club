@@ -1,7 +1,7 @@
 <div class="search">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-8">
+            <div class="col-12">
                 <p class="search__title">Necesito servicio de:</p>
                 <div class="row justify-content-around">
                     <div id="lodging"
@@ -21,18 +21,23 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4">
+            <div class="col-12">
                 <p class="search__title">Para mi:</p>
                 <div class="row justify-content-around">
                     <div id="dog" 
-                        class="col-5 search__item search__item__pet">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
                         <i class="fas fa-dog search__icon"></i>
                         <p class="search__text">Perro</p>
                     </div>
                     <div id="cat" 
-                        class="col-5 search__item search__item__pet">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
                         <i class="fas fa-cat search__icon"></i>
                         <p class="search__text">Gato</p>
+                    </div>
+                    <div id="other" 
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        <i class="fas fa-crow search__icon"></i>
+                        <p class="search__text">Otro</p>
                     </div>
                 </div>
             </div>
@@ -47,6 +52,7 @@
                         <input id="service" name="tpc_service" type="hidden">
                         <input id="dog_input" name="tpc_dog" type="hidden" value=0>
                         <input id="cat_input" name="tpc_cat" type="hidden" value=0>
+                        <input id="other_input" name="tpc_other" type="hidden" value=0>
                         <!--<input id="region" name="tpc_region" type="text">-->
                         <select id="tpc_select_1" class="tpc-form__input" name="tpc_colony">
                             <option selected="true" disabled="disabled">

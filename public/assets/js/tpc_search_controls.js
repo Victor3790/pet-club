@@ -24,14 +24,24 @@ jQuery(document).ready(function ($) {
             $('#cat').children('.search__icon').removeClass('search__icon--active');
             $('#cat').children('.search__text').removeClass('search__text--active');
             $('#cat_input').attr('value', '0'); 
+            $('#other').hide();
+            $('#other').removeClass('search__item--active');
+            $('#other').children('.search__icon').removeClass('search__icon--active');
+            $('#other').children('.search__text').removeClass('search__text--active');
+            $('#other_input').attr('value', '0');
         }else if( item_id == 'dog' && $('#cat').css('display') == 'none'  ) {
-            $('#cat').hide();
+            //$('#cat').hide();
             $('#cat').removeClass('search__item--active');
             $('#cat').children('.search__icon').removeClass('search__icon--active');
             $('#cat').children('.search__text').removeClass('search__text--active');
             $('#cat_input').attr('value', '0'); 
+            $('#other').removeClass('search__item--active');
+            $('#other').children('.search__icon').removeClass('search__icon--active');
+            $('#other').children('.search__text').removeClass('search__text--active');
+            $('#other_input').attr('value', '0');
         }else{
             $('#cat').show();
+            $('#other').show();
         }
 
         switch (item_id) {
@@ -74,6 +84,13 @@ jQuery(document).ready(function ($) {
                     $('#cat_input').attr('value', '1');    
                 else
                     $('#cat_input').attr('value', '0');   
+            break;
+
+            case 'other':
+                if( $('#other').hasClass('search__item--active') )
+                    $('#other_input').attr('value', '1');    
+                else
+                    $('#other_input').attr('value', '0');   
             break;
         
             default:

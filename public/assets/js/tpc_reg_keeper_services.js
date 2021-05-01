@@ -2,15 +2,33 @@ jQuery(document).ready(function ($) {
 
     $('#tpc_lodging_select').change(function(){
         $('#tpc_lodging_qty').toggle();
+        toggle_scroll();
     });
 
     $('#tpc_day_care_select').change(function(){
         $('#tpc_day_care_qty').toggle();
+        toggle_scroll();
     });
 
     $('#tpc_walk_select').change(function(){
         $('#tpc_walk_qty').toggle();
+        toggle_scroll();
     });
+
+    function toggle_scroll()
+    {
+        let tpc_scroll = $('#tab_container').css( 'overflow' );
+        let tpc_checked = $('#tpc_services_controls input:checked').length;
+
+        if( tpc_scroll === 'scroll' && tpc_checked > 0 )
+            return;
+        
+        if( tpc_scroll !== 'scroll' && tpc_checked > 0 )
+            $('#tab_container').css( 'overflow', 'scroll' );
+        
+        if( tpc_scroll !== 'hidden' && tpc_checked === 0 )
+            $('#tab_container').css( 'overflow', 'hidden' );
+    }
 
     $('#tpc_keeper_services').validate({
         ignore: [],

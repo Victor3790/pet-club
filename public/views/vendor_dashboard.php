@@ -39,7 +39,7 @@ if(empty($user_name))
        </li>
     </ul>
  
-    <div class="tab-content" style="overflow:scroll;">
+    <div id="tab_container" class="tab-content">
       <div id="step-1" class="tab-pane" role="tabpanel">
             <h5>Tu dirección</h5>
             <p>Requerimos tu dirección para poder conectarte con clientes cerca de ti.</p>
@@ -307,6 +307,12 @@ if(empty($user_name))
                            Gato
                         </label>
                      </div>
+                     <div class="form-check">
+                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pet_client[]" value="tpc_other">
+                        <label class="form-check-label" for="tpc_pet_client[]">
+                           Otro
+                        </label>
+                     </div>
                   </fieldset>
                   <fieldset id="tpc_dog_weight_controls" class="form-group">
                      <legend>Tamaño de las mascotas.</legend>
@@ -336,7 +342,7 @@ if(empty($user_name))
                         </label>
                      </div>
                   </fieldset>
-                  <fieldset class="form-group">
+                  <fieldset id="tpc_services_controls" class="form-group">
                      <legend>Selecciona los servicios que ofrecerás</legend>
                      <div class="tpc_service_error"></div>
                      <div class="form-check">

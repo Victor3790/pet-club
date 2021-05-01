@@ -134,7 +134,8 @@ if(!class_exists('Tpc_Input_Vars'))
                 'type' => 'array',
                 'validation' => [
                     'tpc_dog',
-                    'tpc_cat'
+                    'tpc_cat',
+                    'tpc_other'
                 ]
             ],
             [

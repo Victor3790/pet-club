@@ -21,6 +21,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-12">
                 <p class="search__title">Para mi:</p>
                 <div class="row justify-content-around">
@@ -38,6 +40,33 @@
                         class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
                         <i class="fas fa-crow search__icon"></i>
                         <p class="search__text">Otro</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="search__title">Tamaño:</p>
+                <div class="row justify-content-around">
+                    <div id="small" 
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        <p class="search__text">Chico</p>
+                        <p class="search__text"> < 10kgs </p>
+                    </div>
+                    <div id="medium-sized" 
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        <p class="search__text">Mediano</p>
+                        <p class="search__text"> 11 - 20kgs </p>
+                    </div>
+                    <div id="big" 
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        <p class="search__text">Grande</p>
+                        <p class="search__text"> 21 - 40kgs </p>
+                    </div>
+                    <div id="extra_big" 
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        <p class="search__text">Gigante</p>
+                        <p class="search__text"> +40kgs </p>
                     </div>
                 </div>
             </div>

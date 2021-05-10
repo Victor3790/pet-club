@@ -71,6 +71,8 @@ class Tpc_Public {
 		
 		require_once TPC_PLUGIN_PATH . 'public/controllers/class_list_widget.php';
 
+		require_once TPC_PLUGIN_PATH . 'public/controllers/class_update_vendor_info.php';
+
     }
 
 	/**
@@ -283,6 +285,15 @@ class Tpc_Public {
 			$this->version, 
 			false );
 
+		wp_register_script( $this->plugin_name . '_tpc_update_keeper_address', 
+            plugin_dir_url( __FILE__ ) . 'assets/js/tpc_update_keeper_address.js', 
+			array( 
+				$this->plugin_name . '_validate',
+				$this->plugin_name . '_tpc_custom_wizard_process'
+			), 
+			$this->version, 
+			false );
+
     }
     
      /**
@@ -296,6 +307,8 @@ class Tpc_Public {
 		$vendor_dashboard 	= new Tpc_Vendor_Dashboard($this->plugin_name);
 		$search_dashboard 	= new Tpc_Search_Dashboard($this->plugin_name);
 		$list_widget   		= new Tpc_List_Widget($this->plugin_name);
+
+		$update_action = new Tpc_Update_Vendor_Info();
 
 		add_shortcode('tpc_vendor_dashboard', array($vendor_dashboard, 'tpc_load_vendor_dashboard'));
 		add_shortcode('tpc_search_dashboard', array($search_dashboard, 'tpc_load_search_dashboard'));
@@ -360,6 +373,17 @@ class Tpc_Public {
 	{
 
 		if( isset( $query_vars['tpc_keeper_view'] ) ) {
+
+			$update_action = new Tpc_Update_Vendor_Info();
+
+			wp_enqueue_script( $this->plugin_name . '_jquery_ajax' );
+			wp_enqueue_script( $this->plugin_name . '_select2' );
+			wp_enqueue_script( $this->plugin_name . '_tpc_update_keeper_address' );
+			wp_enqueue_script( $this->plugin_name . '_smart_wizard' );
+
+			wp_enqueue_style( $this->plugin_name . '_bootstrap_styles' );
+			wp_enqueue_style( $this->plugin_name . '_form_styles' );
+			wp_enqueue_style( $this->plugin_name . '_wizard_styles' );
 
 			require_once TPC_PLUGIN_PATH . 'public/views/keeper_info.php';
 

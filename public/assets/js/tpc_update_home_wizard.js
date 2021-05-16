@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-    $('#tpc_update_address').smartWizard({
+    $('#tpc_update_home').smartWizard({
         theme:'dots',
         cycleSteps: false,
         enableURLhash: false,

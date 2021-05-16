@@ -294,6 +294,33 @@ class Tpc_Public {
 			$this->version, 
 			false );
 
+		wp_register_script( $this->plugin_name . '_tpc_update_form_wizard', 
+            plugin_dir_url( __FILE__ ) . 'assets/js/tpc_update_form_wizard.js', 
+			array( 
+				$this->plugin_name . '_validate',
+				$this->plugin_name . '_tpc_custom_wizard_process'
+			), 
+			$this->version, 
+			false );
+
+		wp_register_script( $this->plugin_name . '_tpc_update_home_wizard', 
+            plugin_dir_url( __FILE__ ) . 'assets/js/tpc_update_home_wizard.js', 
+			array( 
+				$this->plugin_name . '_validate',
+				$this->plugin_name . '_tpc_custom_wizard_process'
+			), 
+			$this->version, 
+			false );
+
+		wp_register_script( $this->plugin_name . '_tpc_update_keeper_home', 
+            plugin_dir_url( __FILE__ ) . 'assets/js/tpc_update_keeper_home.js', 
+			array( 
+				$this->plugin_name . '_validate',
+				$this->plugin_name . '_tpc_custom_wizard_process'
+			), 
+			$this->version, 
+			false );
+
     }
     
      /**
@@ -352,6 +379,7 @@ class Tpc_Public {
 	{ 
 
 		$query_vars['tpc_keeper_view'] = 'tpc_keeper_view';
+		$query_vars['tpc_keeper_about'] = 'tpc_keeper_about';
 		return $query_vars;
 
 	}
@@ -360,11 +388,18 @@ class Tpc_Public {
 	{ 
 
 		$urls['tpc_keeper_view'] = array(
-			'title'	=> __( 'Tu información', 'tpc' ),
-			'icon'	=> '<i class="fa fa-user"></i>',
+			'title'	=> __( 'Dirección', 'tpc' ),
+			'icon'	=> '<i class="fa fa-building"></i>',
 			'url'	=> dokan_get_navigation_url( 'tpc_keeper_view' ),
 			'pos'	=> 10
 		);
+		$urls['tpc_keeper_about'] = array(
+			'title'	=> __( 'Hogar', 'tpc' ),
+			'icon'	=> '<i class="fa fa-home"></i>',
+			'url'	=> dokan_get_navigation_url( 'tpc_keeper_about' ),
+			'pos'	=> 11
+		);
+
 		return $urls;
 
 	}
@@ -374,18 +409,32 @@ class Tpc_Public {
 
 		if( isset( $query_vars['tpc_keeper_view'] ) ) {
 
-			$update_action = new Tpc_Update_Vendor_Info();
-
 			wp_enqueue_script( $this->plugin_name . '_jquery_ajax' );
 			wp_enqueue_script( $this->plugin_name . '_select2' );
 			wp_enqueue_script( $this->plugin_name . '_tpc_update_keeper_address' );
 			wp_enqueue_script( $this->plugin_name . '_smart_wizard' );
+			wp_enqueue_script( $this->plugin_name . '_tpc_update_form_wizard' );
 
 			wp_enqueue_style( $this->plugin_name . '_bootstrap_styles' );
 			wp_enqueue_style( $this->plugin_name . '_form_styles' );
 			wp_enqueue_style( $this->plugin_name . '_wizard_styles' );
 
-			require_once TPC_PLUGIN_PATH . 'public/views/keeper_info.php';
+			require_once TPC_PLUGIN_PATH . 'public/views/update_address.php';
+
+		}
+
+		if( isset( $query_vars['tpc_keeper_about'] ) ) {
+
+			wp_enqueue_script( $this->plugin_name . '_jquery_ajax' );
+			wp_enqueue_script( $this->plugin_name . '_tpc_update_keeper_home' );
+			wp_enqueue_script( $this->plugin_name . '_smart_wizard' );
+			wp_enqueue_script( $this->plugin_name . '_tpc_update_home_wizard' );
+
+			wp_enqueue_style( $this->plugin_name . '_bootstrap_styles' );
+			wp_enqueue_style( $this->plugin_name . '_form_styles' );
+			wp_enqueue_style( $this->plugin_name . '_wizard_styles' );
+
+			require_once TPC_PLUGIN_PATH . 'public/views/update_home.php';
 
 		}
 

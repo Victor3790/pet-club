@@ -113,6 +113,50 @@ if(!class_exists('Tpc_Input_Vars'))
             ],
         ];
 
+        public $update_house_info = [
+            [
+                'input_name' => 'tpc_home', 
+                'type' => 'string', 
+                'validation' => [ 'Casa', 'Apartamento' ]
+            ],
+            [
+                'input_name' => 'tpc_free_spaces',
+                'type' => 'array',
+                'validation' => [
+                    'Jardín frontal',
+                    'Jardín trasero',
+                    'Cochera',
+                    'Balcón',
+                    'Patio',
+                    'Pasillos laterales'
+                ]
+            ],
+            [
+                'input_name' => 'tpc_kids',
+                'type' => 'string',
+                'validation' => [ 'Sí', 'No' ]
+            ],
+            [
+                'input_name' => 'tpc_pets',
+                'type' => 'array',
+                'validation' => [
+                    'Tengo perros',
+                    'Tengo gatos',
+                    'No tengo mascotas'
+                ]
+            ],
+            [
+                'input_name' => 'tpc_furniture',
+                'type' => 'string',
+                'validation' => [ 'Sí', 'No' ]
+            ],
+            [
+                'input_name' => 'tpc_smoking',
+                'type' => 'string',
+                'validation' => [ 'Sí', 'No' ]
+            ]
+        ];
+
         public $service_info = [
             [
                 'input_name' => 'tpc_experience',

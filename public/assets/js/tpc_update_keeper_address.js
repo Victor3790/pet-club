@@ -15,10 +15,7 @@ jQuery(document).ready(function ($) {
                 required: true,
                 rangelength: [5,5],
                 digits: true
-            },
-            tpc_colony: {
-                required: true
-            },
+            }
         },
         messages: {
             tpc_street: {
@@ -33,10 +30,7 @@ jQuery(document).ready(function ($) {
                             .validator
                             .format("El código postal debe tener {0} dígitos. &nbsp;"),
                 digits: 'El código postal no puede tener letras.'
-            },
-            tpc_colony: {
-                required: 'Por favor ingresa tu colonia.'
-            },
+            }
         },
         submitHandler: function (form) {
             tpc_submit(event, form)
@@ -50,11 +44,11 @@ jQuery(document).ready(function ($) {
         $(form).vk_ajax_send({
             url: tpc_object.ajax_url,
             start: function() {
-                $('#tpc_keeper_address_form').smartWizard('loader', 'show');
+                $('#tpc_update_address').smartWizard('loader', 'show');
             },
             onSuccess: function(result){
                 location.reload();
-                //$('#tpc_reg_forms').tpc_wizard_success(result);
+                $('#tpc_reg_forms').tpc_wizard_success(result);
             },
             onError: function (){
                 $('#tpc_reg_forms').tpc_wizard_error();

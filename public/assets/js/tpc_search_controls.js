@@ -30,7 +30,6 @@ jQuery(document).ready(function ($) {
             $('#other').children('.search__text').removeClass('search__text--active');
             $('#other_input').attr('value', '0');
         }else if( item_id == 'dog' && $('#cat').css('display') == 'none'  ) {
-            //$('#cat').hide();
             $('#cat').removeClass('search__item--active');
             $('#cat').children('.search__icon').removeClass('search__icon--active');
             $('#cat').children('.search__text').removeClass('search__text--active');
@@ -54,7 +53,7 @@ jQuery(document).ready(function ($) {
             break;
 
             case 'walk':
-                $('#service').attr('value', 'kp_hour_walk');    
+                $('#service').attr('value', 'kp_walk');    
             break;
         
             default:
@@ -98,5 +97,49 @@ jQuery(document).ready(function ($) {
         }
             
     });
+
+    $('.search__item__size').click( function() {
+
+        $(this).toggleClass('search__item--active')
+        $(this).children('.search__icon').toggleClass('search__icon--active');
+        $(this).children('.search__text').toggleClass('search__text--active');
+
+        let item_id =  $(this).attr('id');
+
+        switch (item_id) {
+            case 'small':
+                if( $('#small').hasClass('search__item--active') )
+                    $('#small_input').attr('value', '1');    
+                else
+                    $('#small_input').attr('value', '0');
+            break;
+
+            case 'medium-sized':
+                if( $('#medium-sized').hasClass('search__item--active') )
+                    $('#medium-sized_input').attr('value', '1');    
+                else
+                    $('#medium-sized_input').attr('value', '0');   
+            break;
+
+            case 'big':
+                if( $('#big').hasClass('search__item--active') )
+                    $('#big_input').attr('value', '1');    
+                else
+                    $('#big_input').attr('value', '0');   
+            break;
+
+            case 'extra-big':
+                if( $('#extra-big').hasClass('search__item--active') )
+                    $('#extra-big_input').attr('value', '1');    
+                else
+                    $('#extra-big_input').attr('value', '0');   
+            break;
+        
+            default:
+                break;
+        }
+            
+    });
+
 
 });

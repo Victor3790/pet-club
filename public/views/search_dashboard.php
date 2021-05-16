@@ -49,22 +49,22 @@
                 <p class="search__title">Tamaño:</p>
                 <div class="row justify-content-around">
                     <div id="small" 
-                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__size">
                         <p class="search__text">Chico</p>
                         <p class="search__text"> < 10kgs </p>
                     </div>
                     <div id="medium-sized" 
-                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__size">
                         <p class="search__text">Mediano</p>
                         <p class="search__text"> 11 - 20kgs </p>
                     </div>
                     <div id="big" 
-                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__size">
                         <p class="search__text">Grande</p>
                         <p class="search__text"> 21 - 40kgs </p>
                     </div>
-                    <div id="extra_big" 
-                        class="col-12 col-sm-3 col-lg-3 search__item search__item__pet">
+                    <div id="extra-big" 
+                        class="col-12 col-sm-3 col-lg-3 search__item search__item__size">
                         <p class="search__text">Gigante</p>
                         <p class="search__text"> +40kgs </p>
                     </div>
@@ -82,8 +82,11 @@
                         <input id="dog_input" name="tpc_dog" type="hidden" value=0>
                         <input id="cat_input" name="tpc_cat" type="hidden" value=0>
                         <input id="other_input" name="tpc_other" type="hidden" value=0>
-                        <!--<input id="region" name="tpc_region" type="text">-->
-                        <select id="tpc_select_1" class="tpc-form__input" name="tpc_colony">
+                        <input id="small_input" name="tpc_small" type="hidden" value=0>
+                        <input id="medium-sized_input" name="tpc_medium-sized" type="hidden" value=0>
+                        <input id="big_input" name="tpc_big" type="hidden" value=0>
+                        <input id="extra-big_input" name="tpc_extra-big" type="hidden" value=0>
+                        <select id="tpc_select_1" class="tpc-form__input" name="tpc_region">
                             <option selected="true" disabled="disabled">
                                 Seleccione
                             </option>

@@ -439,4 +439,45 @@ class Tpc_Public {
 		}
 
 	}
+
+	public function mail_test( $order, $sent_to_admin, $plain_text, $email )
+	{
+
+		if ( $email->id == 'new_order' ) {
+
+			$current_order = new WC_Order( $order->id );
+			$items = $current_order->get_items();
+
+			foreach ( $items as $item ) {
+				
+				$product_factory = new WC_Product_Factory();
+				$product_data = $item->get_data();
+				$product_id = $product_data['product_id'];
+				$product = $product_factory->get_product( $product_id );
+				$class = get_class( $product );
+				
+				if( $class == 'WC_Product_Booking' ) {
+
+					$author_id = get_post_field( 'post_author', $product_id );
+					$keeper_post_id = get_user_meta( $author_id, 'kp_post_id', true );
+					$street = get_post_meta( $keeper_post_id, 'kp_street', true );
+					$zip_code = get_post_meta( $keeper_post_id, 'kp_zip', true );
+					$colony = get_post_meta( $keeper_post_id, 'kp_colony', true );
+					$home_phone = get_post_meta( $keeper_post_id, 'kp_home_phone', true );
+					$cellphone = get_post_meta( $keeper_post_id, 'kp_cellphone', true );
+
+					echo '<h2>Datos del cuidador</h2>';
+					echo 'Calle: ' . $street;
+					echo 'Código postal: ' . $zip_code;
+					echo 'Colonia: ' . $colony;
+					echo 'Número de casa: ' . $home_phone;
+					echo 'Número de celular: ' .  $cellphone;
+
+				}
+
+			}
+
+		}
+
+	}
 }

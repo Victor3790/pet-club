@@ -443,7 +443,7 @@ class Tpc_Public {
 	public function mail_test( $order, $sent_to_admin, $plain_text, $email )
 	{
 
-		if ( $email->id == 'new_order' ) {
+		if ( $email->id == 'customer_completed_order' ) {
 
 			$current_order = new WC_Order( $order->id );
 			$items = $current_order->get_items();
@@ -467,11 +467,13 @@ class Tpc_Public {
 					$cellphone = get_post_meta( $keeper_post_id, 'kp_cellphone', true );
 
 					echo '<h2>Datos del cuidador</h2>';
-					echo 'Calle: ' . $street;
-					echo 'Código postal: ' . $zip_code;
-					echo 'Colonia: ' . $colony;
-					echo 'Número de casa: ' . $home_phone;
-					echo 'Número de celular: ' .  $cellphone;
+					echo '<ul>';
+					echo '<li>Calle: ' . $street . '</li>';
+					echo '<li>Código postal: ' . $zip_code . '</li>';
+					echo '<li>Colonia: ' . $colony . '</li>';
+					echo '<li>Número de casa: ' . $home_phone . '</li>';
+					echo '<li>Número de celular: ' .  $cellphone . '</li>';
+					echo '</ul>';
 
 				}
 

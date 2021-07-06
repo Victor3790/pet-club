@@ -93,7 +93,14 @@ jQuery(document).ready(function ($) {
                 $('#tpc_reg_forms').smartWizard('loader', 'show');
             },
             onSuccess: function(result){
+
+                let tpc_scroll = $('#tab_container').css( 'overflow' );
+
+                if( tpc_scroll === 'scroll')
+                    $('#tab_container').css( 'overflow', 'hidden' );
+
                 $('#tpc_reg_forms').tpc_wizard_success(result);
+
             },
             onError: function (){
                 $('#tpc_reg_forms').tpc_wizard_error();

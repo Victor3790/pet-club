@@ -126,6 +126,9 @@ if(!class_exists('Tpc_Vendor_Dashboard_Action'))
                 'kp_smoking'        =>  $keeper_hi_data['tpc_smoking']
             ];
 
+            if( isset( $_POST['pets'] ) )
+                $post_data['kp_pet_data'] = $_POST['pets'];
+
             $result = Vk_Post_Meta::register_meta( $keeper_post_id, $post_data );
 
             $this->vk_send_result( $result );

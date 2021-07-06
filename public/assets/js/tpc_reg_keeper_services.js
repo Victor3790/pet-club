@@ -1,17 +1,17 @@
 jQuery(document).ready(function ($) {
 
     $('#tpc_lodging_select').change(function(){
-        $('#tpc_lodging_qty').toggle();
+        $('#tpc_lodging_qty').toggle('slow');
         toggle_scroll();
     });
 
     $('#tpc_day_care_select').change(function(){
-        $('#tpc_day_care_qty').toggle();
+        $('#tpc_day_care_qty').toggle('slow');
         toggle_scroll();
     });
 
     $('#tpc_walk_select').change(function(){
-        $('#tpc_walk_qty').toggle();
+        $('#tpc_walk_qty').toggle('slow');
         toggle_scroll();
     });
 

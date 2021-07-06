@@ -137,6 +137,12 @@ class Tpc_Public {
 			$this->version, 
 			'all' );
 
+		wp_register_style( $this->plugin_name . '_pet_inputs_styles', 
+			plugin_dir_url( __FILE__ ) . 'assets/css/pet_inputs.css', 
+			array(), 
+			$this->version, 
+			'all' );
+
 	}
 
 	/**
@@ -318,6 +324,12 @@ class Tpc_Public {
 				$this->plugin_name . '_validate',
 				$this->plugin_name . '_tpc_custom_wizard_process'
 			), 
+			$this->version, 
+			false );
+
+		wp_register_script( $this->plugin_name . '_pet_inputs', 
+            plugin_dir_url( __FILE__ ) . 'assets/js/pet_inputs.js', 
+			array('jquery'), 
 			$this->version, 
 			false );
 

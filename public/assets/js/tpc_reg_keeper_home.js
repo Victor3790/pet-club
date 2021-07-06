@@ -69,6 +69,14 @@ jQuery(document).ready(function ($) {
             }
             else if( element.attr( 'name' ) === 'tpc_attachments' ) {
                 error.appendTo( '.tpc_attachments_error' );
+            }else {
+                let re = new RegExp( 'pets\[[0-9]+\]\[[a-z]+\]' );
+                if( re.test( element.attr( 'name' ) ) ) {
+
+                    $('#tpc-pet-data-error').text('Todos los campos son requeridos');
+                    $('#tpc-pet-data-error').addClass('error');
+
+                }
             }
         },
         submitHandler: function (form) {

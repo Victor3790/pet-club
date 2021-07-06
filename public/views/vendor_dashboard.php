@@ -218,13 +218,15 @@ if(empty($user_name))
                      <p>¿Hay perros y / o gatos en tu casa?.</p>
                      <div class="tpc_pets_error"></div>
                      <div class="form-check">
-                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="Tengo perros">
+                        <input id="tpc_I_have_dogs" class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="Tengo perros">
                         <label class="form-check-label" for="tpc_pets[]">Tengo perros</label>
                      </div>
                      <div class="form-check">
-                        <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="Tengo gatos">
+                        <input id="tpc_I_have_cats" class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="Tengo gatos">
                         <label class="form-check-label" for="tpc_pets[]">Tengo gatos</label>
                      </div>
+                     <div id="tpc-pet-data-error"></div>
+                     <div id="tpc-pet-data" class="pet-data"></div>
                      <div class="form-check">
                         <input class="form-check-input tpc-form__radio" type="checkbox" name="tpc_pets[]" value="No tengo mascotas">
                         <label class="form-check-label" for="tpc_pets[]">No tengo mascotas</label>

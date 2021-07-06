@@ -47,14 +47,16 @@ if(!class_exists('Tpc_Vendor_Dashboard'))
                 '_tpc_reg_keeper_home',
                 '_tpc_reg_keeper_services',
                 '_tpc_wp_media_upload_image',
-                '_select2'
+                '_select2',
+                '_pet_inputs'
             ];
 
             $styles = [
                 '_bootstrap_styles',
                 '_wizard_styles',
                 '_form_styles',
-                '_select2_styles'
+                '_select2_styles',
+                '_pet_inputs_styles'
             ];
 
             $this->vk_enqueue_styles( $this->plugin_name, $styles );

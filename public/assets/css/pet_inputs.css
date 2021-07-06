@@ -1,0 +1,56 @@
+.pet-data
+{
+    display: none;
+    padding: 0;
+}
+
+.pet-data__button
+{
+    padding-top: 8px;
+    padding-bottom: 6px;
+    text-align: center;
+    background-color: #007cba;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+.pet-data__button--add
+{
+    width: 90px;
+    display: block;
+    margin: 20px 0;
+}
+
+.pet-data__button--delete
+{
+    width: 40px;
+    display: inline-block;
+}
+
+.pet-data__button--pic
+{
+    width: 40px;
+    display: inline-block;
+}
+
+.pet-data__button--pic:hover
+{
+    color: #fff;
+}
+
+.pet-data__input-set
+{
+    margin-top: 10px;
+}
+
+.pet-data__name
+{
+    width: 150px!important;
+}
+
+.pet-data__age
+{
+    width: 90px!important;
+}

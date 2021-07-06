@@ -81,8 +81,9 @@ jQuery(document).ready( function( $ ){
                                         '<input class="pet-data__name" name="pets[0][name]" type="text" required>&nbsp;' +
                                         '<label for="pets[0][age]">Edad:&nbsp;</label>' +
                                         '<input class="pet-data__age" name="pets[0][age]" type="number" required>&nbsp;' +
-                                        '<a href="#" id="tpc_open_attachment_uploader" class="pet-data__button pet-data__button--pic">' +
+                                        '<a href="#" class="pet-data__button pet-data__button--pic">' +
                                         '<i class="fa fa-image"></i></a>' +
+                                        '<input class="pet-data__pic" name="pets[0][pic]" type="hidden" required>&nbsp;' +
                                     '</div>' +
                                 '</div>' +
                                 '<span id="add-pet" class="pet-data__button pet-data__button--add">+ Añadir</span>' +
@@ -93,10 +94,11 @@ jQuery(document).ready( function( $ ){
                             '<input class="pet-data__name" name="pets[0][name]" type="text" required>&nbsp;' +
                             '<label for="pets[0][age]">Edad:&nbsp;</label>' +
                             '<input class="pet-data__age" name="pets[0][age]" type="number" required>&nbsp;' +
-                            '<a href="#" id="tpc_open_attachment_uploader" class="pet-data__button pet-data__button--pic">' +
+                            '<a href="#" class="pet-data__button pet-data__button--pic">' +
                             '<i class="fa fa-image"></i></a>&nbsp;' +
                             '<span class="pet-data__button pet-data__button--delete">' +
                             '<i class="fa fa-trash" aria-hidden="true"></i></span>' +
+                            '<input class="pet-data__pic" name="pets[0][pic]" type="hidden" required>&nbsp;' +
                         '</div>';
 
 });

@@ -73,7 +73,7 @@ jQuery(document).ready(function ($) {
                 let re = new RegExp( 'pets\[[0-9]+\]\[[a-z]+\]' );
                 if( re.test( element.attr( 'name' ) ) ) {
 
-                    $('#tpc-pet-data-error').text('Todos los campos son requeridos');
+                    $('#tpc-pet-data-error').text('Todos los campos son requeridos, sube una foto por cada mascota');
                     $('#tpc-pet-data-error').addClass('error');
 
                 }
